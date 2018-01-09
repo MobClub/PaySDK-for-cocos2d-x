@@ -114,8 +114,7 @@ C2DXAndroidPayOrder::C2DXAndroidPayOrder()
 {
     JvmJniEnv env;
     jobject javaObject = newJavaInstance(env, "com.mob.paysdk.PayOrder");
-    jobject globelRef = newGlobelRef(env, javaObject);
-    attachJavaObject(globelRef);
+    attachJavaObject(env, javaObject);
 }
 
 String C2DXAndroidPayOrder::getOrderNo()
@@ -295,7 +294,8 @@ String C2DXAndroidPayOrder::getTicketId()
 
 C2DXAndroidPayOrder::~C2DXAndroidPayOrder()
 {
-    // do nothing
+    JvmJniEnv env;
+    detachJavaObject(env, NULL);
 }
 
 
@@ -310,8 +310,7 @@ C2DXAndroidTicketOrder::C2DXAndroidTicketOrder()
 {
     JvmJniEnv env;
     jobject javaObject = newJavaInstance(env, "com.mob.paysdk.TicketOrder");
-    jobject globelRef = newGlobelRef(env, javaObject);
-    attachJavaObject(globelRef);
+    attachJavaObject(env, javaObject);
 }
 
 
@@ -346,5 +345,6 @@ String C2DXAndroidTicketOrder::getTicketId()
 
 C2DXAndroidTicketOrder::~C2DXAndroidTicketOrder()
 {
-    // do nothing
+    JvmJniEnv env;
+    detachJavaObject(env, NULL);
 }

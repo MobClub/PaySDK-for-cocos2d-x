@@ -22,15 +22,32 @@ namespace mob
         class C2DXCxxJavaObject {
         protected:
             C2DXCxxJavaObject();
-            void attachJavaObject(jobject gRef);
-            void detachJavaObject(jobject gRef);
+
+            /**
+             * 附加javaObject对象到this对象
+             * @param lRef javaObject的引用
+             */
+            void attachJavaObject(JNIEnv* env, jobject lRef);
+
+            /**
+             * 移除javaObject对象从this对象
+             * @param lRef 与attachJavaObject保持一致, 并无含义
+             */
+            void detachJavaObject(JNIEnv* env, jobject lRef);
+
+            /**
+             * 获取附加到this对象上的javaObject的全局引用
+             * @return javaObject的全局引用
+             */
             jobject getJavaObject();
+
+            /**
+             * 获取附加到this对象上的javaObject的本地引用
+             * @return javaObject的本地引用
+             */
             jobject getLocalJavaObject(JNIEnv* env);
         public:
             static jobject newJavaInstance(JNIEnv* env, const char* clazz);
-            static jobject newGlobelRef(JNIEnv* env, jobject localRef);
-            static jobject getLocalJavaObject(JNIEnv* env, jobject gRef);
-
         public:
             virtual ~C2DXCxxJavaObject();
         private:
