@@ -3,7 +3,7 @@
 
 
 
-#include "C2DXAliPayApi.h"
+#include "C2DXMobPayApi.h"
 
 using namespace mob::paysdk;
 
@@ -15,7 +15,7 @@ namespace mob
         private:
             C2DXAndroidAliApi();
         public:
-            CREATE_FUNC(C2DXAndroidAliApi);
+            CREATE_INSTANCE_FUNC(C2DXAndroidAliApi);
             virtual void pay(C2DXPayOrder* order, C2DXOnPayListener* callback);
 
         public:

@@ -17,7 +17,6 @@ import com.mob.paysdk.PayResult;
  */
 public class OnPayListener<T> extends JavaCxxObject implements com.mob.paysdk.OnPayListener<T> {
 
-	private int cxxObject;
 
 	public OnPayListener() {
 		super();

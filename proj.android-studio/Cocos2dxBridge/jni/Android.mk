@@ -11,20 +11,14 @@ ifeq ($(USE_ARM_MODE),1)
 LOCAL_ARM_MODE := arm
 endif
 
-LOCAL_SRC_FILES := 	../../../Classes/C2DXPaySDK/C2DXPaySDK.cpp \
-					../../../Classes/C2DXPaySDK/C2DXOnPayListener.cpp \
-					../../../Classes/C2DXPaySDK/C2DXPayOrder.cpp \
-					../../../Classes/C2DXPaySDK/C2DXPayTicket.cpp \
-					../../../Classes/C2DXPaySDK/C2DXMobPayApi.cpp \
-                    ../../../Classes/C2DXPaySDK/C2DXWxPayApi.cpp \
-                    ../../../Classes/C2DXPaySDK/C2DXAliPayApi.cpp \
+LOCAL_SRC_FILES := 	../../../Classes/C2DXPaySDK/C2DXOnPayListener.cpp \
+					../../../Classes/C2DXPaySDK/C2DXOrder.cpp \
+                    ../../../Classes/C2DXPaySDK/C2DXMobPayApi.cpp \
 					../../../Classes/C2DXPaySDK/C2DXPayResult.cpp \
-                    ../../../Classes/C2DXPaySDK/Android/C2DXAndroidAliApi.cpp \
-                    ../../../Classes/C2DXPaySDK/Android/C2DXAndroidWxApi.cpp \
-                    ../../../Classes/C2DXPaySDK/Android/C2DXAndroidPayOrder.cpp \
-                    ../../../Classes/C2DXPaySDK/Android/C2DXAndroidPayTicket.cpp \
-                    ../../../Classes/C2DXPaySDK/Android/C2DXCxxJavaObject.cpp \
-                    ../../../Classes/C2DXPaySDK/Android/C2DXAndroidWxApi.cpp \
+                    ../../../Classes/C2DXPaySDK/Android/C2DXAndroidPayApi.cpp \
+                    ../../../Classes/C2DXPaySDK/Android/C2DXAndroidOrder.cpp \
+                    ../../../Classes/C2DXPaySDK/Android/C2DXCxxJavaObject.cpp
+
 
 
 
