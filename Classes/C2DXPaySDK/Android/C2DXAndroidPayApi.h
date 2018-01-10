@@ -3,10 +3,10 @@
 
 
 
-#include "C2DXMobPayApi.h"
+#include "C2DXPayApi.h"
 #include "C2DXCxxJavaObject.h"
 #include "C2DXPaySDK.h"
-#include "C2DXMobPayApi.h"
+#include "C2DXPayApi.h"
 
 using namespace mob::paysdk;
 

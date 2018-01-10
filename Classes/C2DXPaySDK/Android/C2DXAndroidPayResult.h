@@ -1,7 +1,7 @@
 #ifndef __C2DXPAYSDKBRIDGE__C2DXALIPAYAPI__
 #define __C2DXPAYSDKBRIDGE__C2DXALIPAYAPI__
 
-#include "C2DXMobPayApi.h"
+#include "C2DXPayApi.h"
 
 using namespace mob::paysdk;
 

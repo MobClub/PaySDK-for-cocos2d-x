@@ -1,7 +1,7 @@
 
 
 
-#include "C2DXMobPayApi.h"
+#include "C2DXPayApi.h"
 
 using namespace mob::paysdk;
 

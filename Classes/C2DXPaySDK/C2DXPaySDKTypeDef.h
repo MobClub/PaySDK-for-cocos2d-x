@@ -3,7 +3,7 @@
 #define __C2DXPAYSDKBRIDGE__C2DXPAYSDKTYPEDEF__
 
 #include "C2DXPaySDK.h"
-#include "C2DXMobPayApi.h"
+#include "C2DXPayApi.h"
 #include "C2DXOrder.h"
 #include "C2DXPayResult.h"
 

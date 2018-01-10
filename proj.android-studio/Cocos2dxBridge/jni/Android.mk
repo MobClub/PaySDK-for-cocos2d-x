@@ -12,7 +12,7 @@ LOCAL_ARM_MODE := arm
 endif
 
 LOCAL_SRC_FILES := 	../../../Classes/C2DXPaySDK/C2DXOrder.cpp \
-                    ../../../Classes/C2DXPaySDK/C2DXMobPayApi.cpp \
+                    ../../../Classes/C2DXPaySDK/C2DXPayApi.cpp \
 					../../../Classes/C2DXPaySDK/C2DXPayResult.cpp \
                     ../../../Classes/C2DXPaySDK/Android/C2DXAndroidPayApi.cpp \
                     ../../../Classes/C2DXPaySDK/Android/C2DXAndroidOrder.cpp \
