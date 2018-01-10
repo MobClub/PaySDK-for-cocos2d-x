@@ -55,6 +55,12 @@ jobject C2DXCxxJavaObject::getJavaObject()
     return globelJavaObject;
 }
 
+
+void C2DXCxxJavaObject::release()
+{
+
+}
+
 C2DXCxxJavaObject::~C2DXCxxJavaObject()
 {
 }

@@ -121,6 +121,14 @@ void C2DXPayOrder::setTicketId(C2DXString ticketId)
 {
 }
 
+C2DXPayOrder::~C2DXPayOrder()
+{
+}
+
+C2DXTicketOrder::C2DXTicketOrder()
+{
+}
+
 /**
  * 设置ticketId
  * @param tId ticketId
@@ -134,5 +142,9 @@ void C2DXTicketOrder::setTicketId(C2DXString tId)
  * @return ticketId
  */
 C2DXString C2DXTicketOrder::getTicketId()
+{
+}
+
+C2DXTicketOrder::~C2DXTicketOrder()
 {
 }

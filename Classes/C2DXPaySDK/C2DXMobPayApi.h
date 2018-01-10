@@ -12,7 +12,7 @@ namespace mob
     {
 
         class C2DXAliPayApi {
-        private:
+        protected:
             C2DXAliPayApi();
         public:
             CREATE_INSTANCE_FUNC(C2DXAliPayApi);
@@ -23,7 +23,7 @@ namespace mob
 
 
         class C2DXWxPayApi {
-        private:
+        protected:
             C2DXWxPayApi();
         public:
             CREATE_INSTANCE_FUNC(C2DXWxPayApi);

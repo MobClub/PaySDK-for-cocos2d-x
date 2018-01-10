@@ -26,6 +26,8 @@ void C2DXAndroidOnPayListener::setOnPayListener(C2DXOnPayListener<O, API>* callb
     onPayListener = callback;
 }
 
-
+C2DXAndroidOnPayListener::~C2DXAndroidOnPayListener()
+{
+}
 
 

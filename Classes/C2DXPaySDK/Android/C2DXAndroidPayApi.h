@@ -14,7 +14,7 @@ namespace mob
 {
     namespace paysdk
     {
-        class C2DXAndroidAliApi : C2DXAliPayApi, public C2DXCxxJavaObject {
+        class C2DXAndroidAliApi : public C2DXAliPayApi, public C2DXCxxJavaObject {
         private:
             C2DXAndroidAliApi();
         public:
