@@ -7,9 +7,6 @@ static __TYPE__* create()
 typedef std::string C2DXString;
 
 #include "C2DXPayResult.h"
-#include "string.h"
-
-
 
 namespace mob
 {

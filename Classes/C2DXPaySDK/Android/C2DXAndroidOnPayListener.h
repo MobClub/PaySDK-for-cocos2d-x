@@ -18,7 +18,10 @@ namespace mob
 
         public:
             template <typename O, typename API>
-            void setOnPayListener(C2DXOnPayListener<O, API>* callback);
+            void setOnPayListener(C2DXOnPayListener<O, API>* callback)
+            {
+                onPayListener = callback;
+            }
 
 
 

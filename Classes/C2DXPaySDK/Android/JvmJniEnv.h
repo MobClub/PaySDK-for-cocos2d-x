@@ -2,9 +2,9 @@
 #define __C2DXPAYSDKBRIDGE__JVMJNIENV__
 
 #include <stdio.h>
-
-#include "jni.h"
 #include "jni/JniHelper.h"
+
+USING_NS_CC;
 
 namespace mob
 {
@@ -13,7 +13,8 @@ namespace mob
         class JvmJniEnv {
         public:
             JvmJniEnv() {
-
+                env = JniHelper::getEnv();
+                env->PushLocalFrame(64);
             };
 
             operator JNIEnv*() {
@@ -21,12 +22,14 @@ namespace mob
             };
 
             JNIEnv* operator->() {
-
+                return env;
             }
 
             ~JvmJniEnv() {
-
+                env->PopLocalFrame(NULL);
             };
+        private:
+            JNIEnv* env;
         };
 
 

@@ -19,9 +19,8 @@ namespace mob
             C2DXAndroidAliApi();
         public:
             CREATE_INSTANCE_FUNC(C2DXAndroidAliApi);
-//            virtual void pay(C2DXPayOrder* order, C2DXOnPayListener* callback);
-//            virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener* callback);
-            template <class O> void pay(O* order, C2DXOnPayListener<O, C2DXAliPayApi>* callback);
+            virtual void pay(C2DXPayOrder* order, C2DXOnPayListener<C2DXPayOrder, C2DXAliPayApi>* callback);
+            virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener<C2DXTicketOrder, C2DXAliPayApi>* callback);
         public:
             virtual ~C2DXAndroidAliApi();
         };
@@ -31,9 +30,8 @@ namespace mob
             C2DXAndroidWxApi();
         public:
             CREATE_INSTANCE_FUNC(C2DXAndroidWxApi);
-//            virtual void pay(C2DXPayOrder* order, C2DXOnPayListener* callback);
-//            virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener* callback);
-            template <class O> void pay(O* order, C2DXOnPayListener<O, C2DXWxPayApi>* callback);
+            virtual void pay(C2DXPayOrder* order, C2DXOnPayListener<C2DXPayOrder, C2DXWxPayApi>* callback);
+            virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener<C2DXTicketOrder, C2DXWxPayApi>* callback);
         public:
             virtual ~C2DXAndroidWxApi();
         };

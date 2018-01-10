@@ -16,7 +16,8 @@ namespace mob
             C2DXAliPayApi();
         public:
             CREATE_INSTANCE_FUNC(C2DXAliPayApi);
-            template <class O> void pay(O* order, C2DXOnPayListener<O, C2DXAliPayApi>* callback);
+            virtual void pay(C2DXPayOrder* order, C2DXOnPayListener<C2DXPayOrder, C2DXAliPayApi>* callback) = 0;
+            virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener<C2DXTicketOrder, C2DXAliPayApi>* callback) = 0;
         public:
             virtual ~C2DXAliPayApi();
         };
@@ -27,7 +28,8 @@ namespace mob
             C2DXWxPayApi();
         public:
             CREATE_INSTANCE_FUNC(C2DXWxPayApi);
-            template <class O> void pay(O* order, C2DXOnPayListener<O, C2DXWxPayApi>* callback);
+            virtual void pay(C2DXPayOrder* order, C2DXOnPayListener<C2DXPayOrder, C2DXWxPayApi>* callback) = 0;
+            virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener<C2DXTicketOrder, C2DXWxPayApi>* callback) = 0;
         public:
             virtual ~C2DXWxPayApi();
         };

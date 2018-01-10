@@ -73,7 +73,7 @@ bool HelloWorld::init()
     //this->addChild(sprite, 0);
 
     auto button = Button::create();
-    button->setTitleText("GetMobId");
+    button->setTitleText("PayWithAli");
     button->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     button->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
         switch (type)
@@ -81,21 +81,13 @@ bool HelloWorld::init()
             case ui::Widget::TouchEventType::BEGAN:
                 break;
             case ui::Widget::TouchEventType::ENDED: {
-//                C2DXMobLinkScene *scene = new C2DXMobLinkScene();
-//                scene->path = "the path";
-//                scene->source = "the source";
-//
-//                __Dictionary *customParams = __Dictionary::create();
-//                customParams->setObject(__String::create("999"), "Price");
-//                customParams->setObject(__String::create("1"), "Chapter");
-//                customParams->setObject(__String::create("Dragon Fire"), "ChapterName");
-//                scene->setCustomParams(customParams);
-//
-//                C2DXMobLink::getMobId(scene, getMobIdHandler);
-
-//                C2DXMobPayApi* api =  C2DXPaySDK::createMobPayAPI<C2DXMobPayApi>();
+                C2DXPayOrder* order = C2DXPayOrder::create();
+                order->setOrderNo(StringUtils::toString(clock()));
+                order->setAmount(1);
+                order->setSubject("subject");
+                order->setBody("body");
                 C2DXAliPayApi* api = C2DXPaySDK::createMobPayAPI<C2DXAliPayApi>();
-
+                api->pay(order, this);
 
             }
                 break;
@@ -123,4 +115,15 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     //_eventDispatcher->dispatchEvent(&customEndEvent);
     
     
+}
+
+
+bool HelloWorld::onWillPay(C2DXString ticketId, C2DXPayOrder* order, C2DXAliPayApi* api)
+{
+
+}
+
+void HelloWorld::onPayEnd(C2DXPayResult* payResult, C2DXPayOrder* order, C2DXAliPayApi* api)
+{
+
 }

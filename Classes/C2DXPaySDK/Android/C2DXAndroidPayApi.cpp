@@ -13,9 +13,9 @@ C2DXAndroidAliApi::C2DXAndroidAliApi()
 {
 }
 
-template <class O>
-void C2DXAndroidAliApi::pay(O* order, C2DXOnPayListener<O, C2DXAliPayApi>* callback)
+void C2DXAndroidAliApi::pay(C2DXPayOrder* order, C2DXOnPayListener<C2DXPayOrder, C2DXAliPayApi>* callback)
 {
+
     JvmJniEnv env;
     jobject jApi = getLocalJavaObject(env);
     jclass jApiClazz = getJavaClass(env, jApi);
@@ -27,10 +27,16 @@ void C2DXAndroidAliApi::pay(O* order, C2DXOnPayListener<O, C2DXAliPayApi>* callb
     jobject jorder = dOrder->getLocalJavaObject(env);
 
     C2DXAndroidOnPayListener* cxx = C2DXAndroidOnPayListener::create();
-    cxx->setOnPayListener(callback);
+    cxx->setOnPayListener<C2DXPayOrder, C2DXAliPayApi>(callback);
     jobject jListener = cxx->getLocalJavaObject(env);
 
     env->CallVoidMethod(jApi, jApiPayMethod, jorder, jListener);
+}
+
+
+void C2DXAndroidAliApi::pay(C2DXTicketOrder* order, C2DXOnPayListener<C2DXTicketOrder, C2DXAliPayApi>* callback)
+{
+
 }
 
 C2DXAndroidAliApi::~C2DXAndroidAliApi()
@@ -49,10 +55,13 @@ C2DXAndroidWxApi::C2DXAndroidWxApi()
 {
 }
 
-template <class O>
-void C2DXAndroidWxApi::pay(O* order, C2DXOnPayListener<O, C2DXWxPayApi>* callback)
+void C2DXAndroidWxApi::pay(C2DXPayOrder* order, C2DXOnPayListener<C2DXPayOrder, C2DXWxPayApi>* callback)
 {
+}
 
+
+void C2DXAndroidWxApi::pay(C2DXTicketOrder* order, C2DXOnPayListener<C2DXTicketOrder, C2DXWxPayApi>* callback)
+{
 }
 
 C2DXAndroidWxApi::~C2DXAndroidWxApi()
