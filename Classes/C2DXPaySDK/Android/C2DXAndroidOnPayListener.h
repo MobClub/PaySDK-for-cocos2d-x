@@ -22,7 +22,7 @@ namespace mob
 
 
 
-//            void onWillPay(String ticketId, O* order, API* api);
+//            void onWillPay(C2DXString ticketId, O* order, API* api);
 //            void onPayEnd(C2DXPayResult* payResult, O* order, API* api);
 
         private:

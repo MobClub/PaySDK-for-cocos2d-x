@@ -15,7 +15,7 @@ using namespace cocos2d;
 #include "cJSON.h"
 
 #define CCJC_CAST_CCNUMBER(__pDict__,__sKey__) dynamic_cast<CCNumber *>(__pDict__->objectForKey(__sKey__))
-#define CCJC_CAST_CCSTRING(__pDict__,__sKey__) dynamic_cast<CCString *>(__pDict__->objectForKey(__sKey__))
+#define CCJC_CAST_CCC2DXString(__pDict__,__sKey__) dynamic_cast<CCC2DXString *>(__pDict__->objectForKey(__sKey__))
 #define CCJC_CAST_CCBOOL(__pDict__,__sKey__) dynamic_cast<CCBool *>(__pDict__->objectForKey(__sKey__))
 #define CCJC_CAST_CCARRAY(__pDict__,__sKey__) dynamic_cast<CCArray *>(__pDict__->objectForKey(__sKey__))
 #define CCJC_CAST_CCDICTIONARY(__pDict__,__sKey__) dynamic_cast<CCDictionary *>(__pDict__->objectForKey(__sKey__))

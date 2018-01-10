@@ -28,7 +28,7 @@ C2DXPayOrder::C2DXPayOrder()
  * 获取之前配置的支付订单号
  * @return 订单号
  */
-String C2DXPayOrder::getOrderNo()
+C2DXString C2DXPayOrder::getOrderNo()
 {
 }
 
@@ -36,7 +36,7 @@ String C2DXPayOrder::getOrderNo()
  * 设置支付订单号
  * @param orderNo 订单号
  */
-void C2DXPayOrder::setOrderNo(String orderNo)
+void C2DXPayOrder::setOrderNo(C2DXString orderNo)
 {
 }
 
@@ -61,7 +61,7 @@ void C2DXPayOrder::setAmount(int amount)
  * 获取之前配置的支付标题, 支付时展示
  * @return 支付标题
  */
-String C2DXPayOrder::getSubject()
+C2DXString C2DXPayOrder::getSubject()
 {
 }
 
@@ -69,7 +69,7 @@ String C2DXPayOrder::getSubject()
  * 设置支付标题, 支付时展示
  * @param subject 支付标题
  */
-void C2DXPayOrder::setSubject(String subject)
+void C2DXPayOrder::setSubject(C2DXString subject)
 {
 }
 
@@ -77,7 +77,7 @@ void C2DXPayOrder::setSubject(String subject)
  * 获取之前配置的支付主体, 支付时展示
  * @return 支付主体
  */
-String C2DXPayOrder::getBody()
+C2DXString C2DXPayOrder::getBody()
 {
 }
 
@@ -85,47 +85,23 @@ String C2DXPayOrder::getBody()
  * 设置支付主体, 支付时展示
  * @return 支付主体
  */
-void C2DXPayOrder::setBody(String body)
+void C2DXPayOrder::setBody(C2DXString body)
 {
 }
 
-String C2DXPayOrder::getDescription()
+C2DXString C2DXPayOrder::getDescription()
 {
 }
 
-void C2DXPayOrder::setDescription(String description)
+void C2DXPayOrder::setDescription(C2DXString description)
 {
 }
 
-String C2DXPayOrder::getMetadata()
+C2DXString C2DXPayOrder::getMetadata()
 {
 }
 
-void C2DXPayOrder::setMetadata(String metadata)
-{
-}
-
-/**
- * 获取ticketId
- * @return ticketId
- */
-String C2DXPayOrder::getTicketId()
-{
-}
-
-/**
- * 设置ticketId
- * @param tId ticketId
- */
-void C2DXPayOrder::setTicketId(String ticketId)
-{
-}
-
-/**
- * 设置ticketId
- * @param tId ticketId
- */
-void C2DXTicketOrder::setTicketId(String tId)
+void C2DXPayOrder::setMetadata(C2DXString metadata)
 {
 }
 
@@ -133,6 +109,30 @@ void C2DXTicketOrder::setTicketId(String tId)
  * 获取ticketId
  * @return ticketId
  */
-String C2DXTicketOrder::getTicketId()
+C2DXString C2DXPayOrder::getTicketId()
+{
+}
+
+/**
+ * 设置ticketId
+ * @param tId ticketId
+ */
+void C2DXPayOrder::setTicketId(C2DXString ticketId)
+{
+}
+
+/**
+ * 设置ticketId
+ * @param tId ticketId
+ */
+void C2DXTicketOrder::setTicketId(C2DXString tId)
+{
+}
+
+/**
+ * 获取ticketId
+ * @return ticketId
+ */
+C2DXString C2DXTicketOrder::getTicketId()
 {
 }

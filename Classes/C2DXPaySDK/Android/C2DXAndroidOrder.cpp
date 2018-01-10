@@ -16,7 +16,7 @@ C2DXAndroidPayOrder::C2DXAndroidPayOrder()
     attachJavaObject(env, javaObject);
 }
 
-String C2DXAndroidPayOrder::getOrderNo()
+C2DXString C2DXAndroidPayOrder::getOrderNo()
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -24,13 +24,13 @@ String C2DXAndroidPayOrder::getOrderNo()
         return "";
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "getOrderNo", "()Ljava/lang/String;");
-    jstring jvalue = (jstring)env->CallObjectMethod(jthiz, jmethod);
-    String ret = env->GetStringUTFChars(jvalue, NULL);
+    jmethodID jmethod = env->GetMethodID(jclazz, "getOrderNo", "()Ljava/lang/C2DXString;");
+    jC2DXString jvalue = (jC2DXString)env->CallObjectMethod(jthiz, jmethod);
+    C2DXString ret = env->GetC2DXStringUTFChars(jvalue, NULL);
     return ret;
 }
 
-void C2DXAndroidPayOrder::setOrderNo(String orderNo)
+void C2DXAndroidPayOrder::setOrderNo(C2DXString orderNo)
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -38,8 +38,8 @@ void C2DXAndroidPayOrder::setOrderNo(String orderNo)
         return;
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "setOrderNo", "(Ljava/lang/String;)V");
-    jstring jvalue = env->NewStringUTF(orderNo.c_str());
+    jmethodID jmethod = env->GetMethodID(jclazz, "setOrderNo", "(Ljava/lang/C2DXString;)V");
+    jC2DXString jvalue = env->NewC2DXStringUTF(orderNo.c_str());
     env->CallVoidMethod(jthiz, jmethod, jvalue);
 }
 
@@ -68,7 +68,7 @@ void C2DXAndroidPayOrder::setAmount(int amount)
     env->CallVoidMethod(jthiz, jmethod, amount);
 }
 
-String C2DXAndroidPayOrder::getSubject()
+C2DXString C2DXAndroidPayOrder::getSubject()
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -76,13 +76,13 @@ String C2DXAndroidPayOrder::getSubject()
         return "";
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "getSubject", "()Ljava/lang/String;");
-    jstring jvalue = (jstring)env->CallObjectMethod(jthiz, jmethod);
-    String ret = env->GetStringUTFChars(jvalue, NULL);
+    jmethodID jmethod = env->GetMethodID(jclazz, "getSubject", "()Ljava/lang/C2DXString;");
+    jC2DXString jvalue = (jC2DXString)env->CallObjectMethod(jthiz, jmethod);
+    C2DXString ret = env->GetC2DXStringUTFChars(jvalue, NULL);
     return ret;
 }
 
-void C2DXAndroidPayOrder::setSubject(String subject)
+void C2DXAndroidPayOrder::setSubject(C2DXString subject)
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -90,12 +90,12 @@ void C2DXAndroidPayOrder::setSubject(String subject)
         return;
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "setSubject", "(Ljava/lang/String;)V");
-    jstring jvalue = env->NewStringUTF(subject.c_str());
+    jmethodID jmethod = env->GetMethodID(jclazz, "setSubject", "(Ljava/lang/C2DXString;)V");
+    jC2DXString jvalue = env->NewC2DXStringUTF(subject.c_str());
     env->CallVoidMethod(jthiz, jmethod, jvalue);
 }
 
-String C2DXAndroidPayOrder::getBody()
+C2DXString C2DXAndroidPayOrder::getBody()
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -103,13 +103,13 @@ String C2DXAndroidPayOrder::getBody()
         return "";
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "getBody", "()Ljava/lang/String;");
-    jstring jvalue = (jstring)env->CallObjectMethod(jthiz, jmethod);
-    String ret = env->GetStringUTFChars(jvalue, NULL);
+    jmethodID jmethod = env->GetMethodID(jclazz, "getBody", "()Ljava/lang/C2DXString;");
+    jC2DXString jvalue = (jC2DXString)env->CallObjectMethod(jthiz, jmethod);
+    C2DXString ret = env->GetC2DXStringUTFChars(jvalue, NULL);
     return ret;
 }
 
-void C2DXAndroidPayOrder::setBody(String body)
+void C2DXAndroidPayOrder::setBody(C2DXString body)
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -117,12 +117,12 @@ void C2DXAndroidPayOrder::setBody(String body)
         return;
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "setBody", "(Ljava/lang/String;)V");
-    jstring jvalue = env->NewStringUTF(body.c_str());
+    jmethodID jmethod = env->GetMethodID(jclazz, "setBody", "(Ljava/lang/C2DXString;)V");
+    jC2DXString jvalue = env->NewC2DXStringUTF(body.c_str());
     env->CallVoidMethod(jthiz, jmethod, jvalue);
 }
 
-String C2DXAndroidPayOrder::getDescription()
+C2DXString C2DXAndroidPayOrder::getDescription()
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -130,13 +130,13 @@ String C2DXAndroidPayOrder::getDescription()
         return "";
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "getDescription", "()Ljava/lang/String;");
-    jstring jvalue = (jstring)env->CallObjectMethod(jthiz, jmethod);
-    String ret = env->GetStringUTFChars(jvalue, NULL);
+    jmethodID jmethod = env->GetMethodID(jclazz, "getDescription", "()Ljava/lang/C2DXString;");
+    jC2DXString jvalue = (jC2DXString)env->CallObjectMethod(jthiz, jmethod);
+    C2DXString ret = env->GetC2DXStringUTFChars(jvalue, NULL);
     return ret;
 }
 
-void C2DXAndroidPayOrder::setDescription(String description)
+void C2DXAndroidPayOrder::setDescription(C2DXString description)
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -144,12 +144,12 @@ void C2DXAndroidPayOrder::setDescription(String description)
         return;
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "setDescription", "(Ljava/lang/String;)V");
-    jstring jvalue = env->NewStringUTF(description.c_str());
+    jmethodID jmethod = env->GetMethodID(jclazz, "setDescription", "(Ljava/lang/C2DXString;)V");
+    jC2DXString jvalue = env->NewC2DXStringUTF(description.c_str());
     env->CallVoidMethod(jthiz, jmethod, jvalue);
 }
 
-String C2DXAndroidPayOrder::getMetadata()
+C2DXString C2DXAndroidPayOrder::getMetadata()
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -157,13 +157,13 @@ String C2DXAndroidPayOrder::getMetadata()
         return "";
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "getMetadata", "()Ljava/lang/String;");
-    jstring jvalue = (jstring)env->CallObjectMethod(jthiz, jmethod);
-    String ret = env->GetStringUTFChars(jvalue, NULL);
+    jmethodID jmethod = env->GetMethodID(jclazz, "getMetadata", "()Ljava/lang/C2DXString;");
+    jC2DXString jvalue = (jC2DXString)env->CallObjectMethod(jthiz, jmethod);
+    C2DXString ret = env->GetC2DXStringUTFChars(jvalue, NULL);
     return ret;
 }
 
-void C2DXAndroidPayOrder::setMetadata(String metadata)
+void C2DXAndroidPayOrder::setMetadata(C2DXString metadata)
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -171,12 +171,12 @@ void C2DXAndroidPayOrder::setMetadata(String metadata)
         return;
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "setMetadata", "(Ljava/lang/String;)V");
-    jstring jvalue = env->NewStringUTF(metadata.c_str());
+    jmethodID jmethod = env->GetMethodID(jclazz, "setMetadata", "(Ljava/lang/C2DXString;)V");
+    jC2DXString jvalue = env->NewC2DXStringUTF(metadata.c_str());
     env->CallVoidMethod(jthiz, jmethod, jvalue);
 }
 
-String C2DXAndroidPayOrder::getTicketId()
+C2DXString C2DXAndroidPayOrder::getTicketId()
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -184,9 +184,9 @@ String C2DXAndroidPayOrder::getTicketId()
         return "";
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "getTicketId", "()Ljava/lang/String;");
-    jstring jvalue = (jstring)env->CallObjectMethod(jthiz, jmethod);
-    String ret = env->GetStringUTFChars(jvalue, NULL);
+    jmethodID jmethod = env->GetMethodID(jclazz, "getTicketId", "()Ljava/lang/C2DXString;");
+    jC2DXString jvalue = (jC2DXString)env->CallObjectMethod(jthiz, jmethod);
+    C2DXString ret = env->GetC2DXStringUTFChars(jvalue, NULL);
     return ret;
 }
 
@@ -210,7 +210,7 @@ C2DXAndroidTicketOrder::C2DXAndroidTicketOrder()
     attachJavaObject(env, javaObject);
 }
 
-void C2DXAndroidTicketOrder::setTicketId(String tId)
+void C2DXAndroidTicketOrder::setTicketId(C2DXString tId)
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -218,12 +218,12 @@ void C2DXAndroidTicketOrder::setTicketId(String tId)
         return;
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "setTicketId", "(Ljava/lang/String;)V");
-    jstring jvalue = env->NewStringUTF(tId.c_str());
+    jmethodID jmethod = env->GetMethodID(jclazz, "setTicketId", "(Ljava/lang/C2DXString;)V");
+    jC2DXString jvalue = env->NewC2DXStringUTF(tId.c_str());
     env->CallVoidMethod(jthiz, jmethod, jvalue);
 }
 
-String C2DXAndroidTicketOrder::getTicketId()
+C2DXString C2DXAndroidTicketOrder::getTicketId()
 {
     JvmJniEnv env;
     jobject jthiz = getLocalJavaObject(env);
@@ -231,9 +231,9 @@ String C2DXAndroidTicketOrder::getTicketId()
         return "";
     }
     jclass jclazz = env->GetObjectClass(jthiz);
-    jmethodID jmethod = env->GetMethodID(jclazz, "getTicketId", "()Ljava/lang/String;");
-    jstring jvalue = (jstring)env->CallObjectMethod(jthiz, jmethod);
-    String ret = env->GetStringUTFChars(jvalue, NULL);
+    jmethodID jmethod = env->GetMethodID(jclazz, "getTicketId", "()Ljava/lang/C2DXString;");
+    jC2DXString jvalue = (jC2DXString)env->CallObjectMethod(jthiz, jmethod);
+    C2DXString ret = env->GetC2DXStringUTFChars(jvalue, NULL);
     return ret;
 }
 

@@ -2,15 +2,11 @@
 #define __C2DXPAYSDKBRIDGE__C2DXORDER__
 
 #include <stdio.h>
-#include "string.h"
 #include <iostream>
+#include "C2DXPaySDK.h"
 
-using namespace std;
-typedef std::string String;
-
-
-#define CREATE_INSTANCE_FUNC(__TYPE__) \
-static __TYPE__* create()
+//using namespace std;
+//typedef std::C2DXString C2DXString;
 
 namespace mob
 {
@@ -24,13 +20,13 @@ namespace mob
              * 获取之前配置的支付订单号
              * @return 订单号
              */
-            virtual String getOrderNo();
+            virtual C2DXString getOrderNo();
 
             /**
              * 设置支付订单号
              * @param orderNo 订单号
              */
-            virtual void setOrderNo(String orderNo);
+            virtual void setOrderNo(C2DXString orderNo);
 
             /**
              * 获取之前配置的支付金额, 单位：分.
@@ -48,39 +44,39 @@ namespace mob
              * 获取之前配置的支付标题, 支付时展示
              * @return 支付标题
              */
-            virtual String getSubject();
+            virtual C2DXString getSubject();
 
             /**
              * 设置支付标题, 支付时展示
              * @param subject 支付标题
              */
-            virtual void setSubject(String subject);
+            virtual void setSubject(C2DXString subject);
 
             /**
              * 获取之前配置的支付主体, 支付时展示
              * @return 支付主体
              */
-            virtual String getBody();
+            virtual C2DXString getBody();
 
             /**
              * 设置支付主体, 支付时展示
              * @return 支付主体
              */
-            virtual void setBody(String body);
+            virtual void setBody(C2DXString body);
 
-            virtual String getDescription();
+            virtual C2DXString getDescription();
 
-            virtual void setDescription(String description);
+            virtual void setDescription(C2DXString description);
 
-            virtual String getMetadata();
+            virtual C2DXString getMetadata();
 
-            virtual void setMetadata(String metadata);
+            virtual void setMetadata(C2DXString metadata);
 
             /**
              * 获取ticketId
              * @return ticketId
              */
-            virtual String getTicketId();
+            virtual C2DXString getTicketId();
 
         protected:
             C2DXPayOrder();
@@ -88,7 +84,7 @@ namespace mob
              * 设置ticketId
              * @param tId ticketId
              */
-            virtual void setTicketId(String ticketId);
+            virtual void setTicketId(C2DXString ticketId);
 
         public:
             virtual ~C2DXPayOrder();
@@ -102,13 +98,13 @@ namespace mob
              * 设置ticketId
              * @param tId ticketId
              */
-            virtual void setTicketId(String tId);
+            virtual void setTicketId(C2DXString tId);
 
             /**
              * 获取ticketId
              * @return ticketId
              */
-            virtual String getTicketId();
+            virtual C2DXString getTicketId();
 
         protected:
             C2DXTicketOrder();

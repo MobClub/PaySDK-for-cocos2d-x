@@ -52,8 +52,8 @@ void CCJSONConverter::convertJsonToDictionary(cJSON *json, __Dictionary *Diction
     cJSON * j = json->child;
     while (j) {
         Ref * obj = getJsonObj(j);
-        Dictionary->setObject(obj, j->string);
-        CCLog("Dictionary setObject -- addObject success  %s", j->string);
+        Dictionary->setObject(obj, j->C2DXString);
+        CCLog("Dictionary setObject -- addObject success  %s", j->C2DXString);
         j = j->next;
     }
 }
@@ -95,24 +95,24 @@ void CCJSONConverter::convertArrayToJson(__Array * array, cJSON * json)
 
 cJSON * CCJSONConverter::getObjJson(Ref * obj)
 {
-    std::string s = typeid(*obj).name();
-    if(s.find("Dictionary")!=std::string::npos){
+    std::C2DXString s = typeid(*obj).name();
+    if(s.find("Dictionary")!=std::C2DXString::npos){
         cJSON * json = cJSON_CreateObject();
         convertDictionaryToJson((__Dictionary *)obj, json);
         return json;
-    }else if(s.find("Array")!=std::string::npos){
+    }else if(s.find("Array")!=std::C2DXString::npos){
         cJSON * json = cJSON_CreateArray();
         convertArrayToJson((__Array *)obj, json);
         return json;
-    }else if(s.find("String")!=std::string::npos){
-        __String * s = (__String *)obj;
-        cJSON * json = cJSON_CreateString(s->getCString());
+    }else if(s.find("C2DXString")!=std::C2DXString::npos){
+        __C2DXString * s = (__C2DXString *)obj;
+        cJSON * json = cJSON_CreateC2DXString(s->getCC2DXString());
         return json;
-    }else if(s.find("CCNumber")!=std::string::npos){
+    }else if(s.find("CCNumber")!=std::C2DXString::npos){
         CCNumber * n = (CCNumber *)obj;
         cJSON * json = cJSON_CreateNumber(n->getDoubleValue());
         return json;
-    }else if(s.find("CCNull")!=std::string::npos){
+    }else if(s.find("CCNull")!=std::C2DXString::npos){
         cJSON * json = cJSON_CreateNull();
         return json;
     }
@@ -140,11 +140,11 @@ Ref * CCJSONConverter::getJsonObj(cJSON * json)
             convertJsonToArray(json, array);
             return array;
         }
-        case cJSON_String:
+        case cJSON_C2DXString:
         {
-        	CCLog("cJSON_String");
-            __String * string = new __String(json->valuestring);
-            return string;
+        	CCLog("cJSON_C2DXString");
+            __C2DXString * C2DXString = new __C2DXString(json->valueC2DXString);
+            return C2DXString;
         }
         case cJSON_Number:
         {

@@ -33,7 +33,7 @@ public class OnPayListener<T> extends JavaCxxObject implements com.mob.paysdk.On
 	}
 
 	@Override
-	public boolean onWillPay(String s, T t, MobPayAPI mobPayAPI) {
+	public boolean onWillPay(C2DXString s, T t, MobPayAPI mobPayAPI) {
 		int cxxThis = getCxxObject();
 		return nativeOnWillPay(cxxThis, s, t, mobPayAPI);
 	}
@@ -45,7 +45,7 @@ public class OnPayListener<T> extends JavaCxxObject implements com.mob.paysdk.On
 	}
 
 	private native int nativeOnCreateCxxObject(int p);
-	private native boolean nativeOnWillPay(int cxxThis, String s, T t, MobPayAPI mobPayAPI);
+	private native boolean nativeOnWillPay(int cxxThis, C2DXString s, T t, MobPayAPI mobPayAPI);
 	private native void nativeOnPayEnd(int cxxThis, PayResult payResult, T t, MobPayAPI mobPayAPI);
 	private native int nativeOnDestoryCxxObject(int p);
 }

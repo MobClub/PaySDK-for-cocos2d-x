@@ -10,37 +10,26 @@ namespace mob
 {
     namespace paysdk
     {
-        class C2DXMobPayApi {
-        private:
-            C2DXMobPayApi();
-        public:
-            virtual void pay(C2DXPayOrder* order, C2DXOnPayListener* callback) = 0;
-            virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener* callback) = 0;
-        public:
-            virtual ~C2DXMobPayApi();
-        };
-		
-		
-		
-		class C2DXAliPayApi : C2DXMobPayApi {
+
+        template <class O> class C2DXAliPayApi {
         private:
             C2DXAliPayApi();
         public:
             CREATE_INSTANCE_FUNC(C2DXAliPayApi);
-            virtual void pay(C2DXPayOrder* order, C2DXOnPayListener* callback);
-            virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener* callback);
+            virtual void pay(O* order, C2DXOnPayListener<O, C2DXAliPayApi>* callback);
+//            virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener* callback);
         public:
             virtual ~C2DXAliPayApi();
         };
-		
-		
-		class C2DXWxPayApi : C2DXMobPayApi {
+
+
+        template <class O> class C2DXWxPayApi {
         private:
             C2DXWxPayApi();
         public:
             CREATE_INSTANCE_FUNC(C2DXWxPayApi);
-            virtual void pay(C2DXPayOrder* order, C2DXOnPayListener* callback);
-            virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener* callback)
+            virtual void pay(O* order, C2DXOnPayListener<O, C2DXWxPayApi>* callback);
+//            virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener* callback);
 
         public:
             virtual ~C2DXWxPayApi();

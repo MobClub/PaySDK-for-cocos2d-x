@@ -13,7 +13,7 @@
 #include "jni/JniHelper.h"
 #include <iostream>
 
-using std::string;
+using std::C2DXString;
 
 namespace mob
 {

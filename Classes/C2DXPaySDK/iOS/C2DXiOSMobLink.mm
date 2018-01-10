@@ -36,22 +36,22 @@ C2DXDictionary* convertNSDictToCCDict(NSDictionary *dict);
 NSMutableDictionary* convertC2DXDictionaryToNSDictionary(C2DXDictionary *Dictionary);
 
 /**
- *	@brief	转换NSString为C2DXString类型
+ *	@brief	转换NSC2DXString为C2DXC2DXString类型
  *
- *	@param 	string 	字符串
+ *	@param 	C2DXString 	字符串
  *
  *	@return	字符类型
  */
-C2DXString* convertNSStringToC2DXString(NSString *string);
+C2DXC2DXString* convertNSC2DXStringToC2DXC2DXString(NSC2DXString *C2DXString);
 
 /**
- *	@brief	转换C2DXString为NSString类型
+ *	@brief	转换C2DXC2DXString为NSC2DXString类型
  *
- *	@param 	string 	字符串
+ *	@param 	C2DXString 	字符串
  *
  *	@return	字符类型
  */
-NSString* convertC2DXStringToNSString(C2DXString *String);
+NSC2DXString* convertC2DXC2DXStringToNSC2DXString(C2DXC2DXString *C2DXString);
 
 /**
  *	@brief	转换NSArray为C2DXArray类型
@@ -79,35 +79,35 @@ C2DXDictionary* convertNSDictToCCDict(NSDictionary *dict)
         NSArray *allKeys = [dict allKeys];
         for (int i = 0; i < [allKeys count]; i++)
         {
-            NSString *key = [allKeys objectAtIndex:i];
+            NSC2DXString *key = [allKeys objectAtIndex:i];
             id value = [dict objectForKey:key];
             
-            if ([value isKindOfClass:[NSString class]])
+            if ([value isKindOfClass:[NSC2DXString class]])
             {
-                C2DXString *strValue = convertNSStringToC2DXString(value);
+                C2DXC2DXString *strValue = convertNSC2DXStringToC2DXC2DXString(value);
                 if (strValue)
                 {
-                    ccDict -> setObject(strValue, [key UTF8String]);
+                    ccDict -> setObject(strValue, [key UTF8C2DXString]);
                 }
             }
             else if ([value isKindOfClass:[NSNumber class]])
             {
-                C2DXString *strValue = convertNSStringToC2DXString([NSString stringWithFormat:@"%@", value]);
+                C2DXC2DXString *strValue = convertNSC2DXStringToC2DXC2DXString([NSC2DXString C2DXStringWithFormat:@"%@", value]);
                 if (strValue)
                 {
-                    ccDict -> setObject(strValue, [key UTF8String]);
+                    ccDict -> setObject(strValue, [key UTF8C2DXString]);
                 }
             }
             else if ([value isKindOfClass:[NSDate class]])
             {
-                ccDict -> setObject(C2DXDouble::create([value timeIntervalSince1970] * 1000), [key UTF8String]);
+                ccDict -> setObject(C2DXDouble::create([value timeIntervalSince1970] * 1000), [key UTF8C2DXString]);
             }
             else if ([value isKindOfClass:[NSDictionary class]])
             {
                 C2DXDictionary *dictValue = convertNSDictToCCDict(value);
                 if (dictValue)
                 {
-                    ccDict -> setObject(dictValue, [key UTF8String]);
+                    ccDict -> setObject(dictValue, [key UTF8C2DXString]);
                 }
             }
             else if ([value isKindOfClass:[NSArray class]])
@@ -115,7 +115,7 @@ C2DXDictionary* convertNSDictToCCDict(NSDictionary *dict)
                 C2DXArray *arrValue = convertNSArrayToC2DXArray(value);
                 if (arrValue)
                 {
-                    ccDict -> setObject(arrValue, [key UTF8String]);
+                    ccDict -> setObject(arrValue, [key UTF8C2DXString]);
                 }
             }
         }
@@ -136,17 +136,17 @@ NSMutableDictionary * convertC2DXDictionaryToNSDictionary(C2DXDictionary * Dicti
         {
             for (int i = 0; i < allkeys -> count(); i ++)
             {
-                C2DXString * key = dynamic_cast<C2DXString *> (allkeys -> C2DXObjectAtIndex(i));
-                C2DXObject * value = Dictionary -> objectForKey(key -> getCString());
+                C2DXC2DXString * key = dynamic_cast<C2DXC2DXString *> (allkeys -> C2DXObjectAtIndex(i));
+                C2DXObject * value = Dictionary -> objectForKey(key -> getCC2DXString());
                 
-                if (dynamic_cast<C2DXString*>(value) != NULL)
+                if (dynamic_cast<C2DXC2DXString*>(value) != NULL)
                 {
-                    NSString *strValue = convertC2DXStringToNSString(dynamic_cast<C2DXString*>(value) );
+                    NSC2DXString *strValue = convertC2DXC2DXStringToNSC2DXString(dynamic_cast<C2DXC2DXString*>(value) );
                     if (strValue)
                     {
                         [dict setObject:strValue
-                                 forKey:[NSString stringWithCString:key -> getCString()
-                                                           encoding:NSUTF8StringEncoding]];
+                                 forKey:[NSC2DXString C2DXStringWithCC2DXString:key -> getCC2DXString()
+                                                           encoding:NSUTF8C2DXStringEncoding]];
                     }
                 }
                 else if (dynamic_cast<C2DXDictionary*>(value) != NULL)
@@ -155,8 +155,8 @@ NSMutableDictionary * convertC2DXDictionaryToNSDictionary(C2DXDictionary * Dicti
                     if (dictValue)
                     {
                         [dict setObject:dictValue
-                                 forKey:[NSString stringWithCString:key -> getCString()
-                                                           encoding:NSUTF8StringEncoding]];
+                                 forKey:[NSC2DXString C2DXStringWithCC2DXString:key -> getCC2DXString()
+                                                           encoding:NSUTF8C2DXStringEncoding]];
                     }
                 }
                 else if (dynamic_cast<C2DXArray*>(value) != NULL)
@@ -165,8 +165,8 @@ NSMutableDictionary * convertC2DXDictionaryToNSDictionary(C2DXDictionary * Dicti
                     if (arrayValue)
                     {
                         [dict setObject:arrayValue
-                                 forKey:[NSString stringWithCString:key -> getCString()
-                                                           encoding:NSUTF8StringEncoding]];
+                                 forKey:[NSC2DXString C2DXStringWithCC2DXString:key -> getCC2DXString()
+                                                           encoding:NSUTF8C2DXStringEncoding]];
                     }
                 }
             }
@@ -176,21 +176,21 @@ NSMutableDictionary * convertC2DXDictionaryToNSDictionary(C2DXDictionary * Dicti
     return NULL;
 }
 
-C2DXString* convertNSStringToC2DXString(NSString *string)
+C2DXC2DXString* convertNSC2DXStringToC2DXC2DXString(NSC2DXString *C2DXString)
 {
-    if (string)
+    if (C2DXString)
     {
-        return C2DXString::create([string cStringUsingEncoding:NSUTF8StringEncoding]);
+        return C2DXC2DXString::create([C2DXString cC2DXStringUsingEncoding:NSUTF8C2DXStringEncoding]);
     }
     
     return NULL;
 }
 
-NSString* convertC2DXStringToNSString(C2DXString *string)
+NSC2DXString* convertC2DXC2DXStringToNSC2DXString(C2DXC2DXString *C2DXString)
 {
-    if (string)
+    if (C2DXString)
     {
-        return [NSString stringWithCString:string -> getCString() encoding:NSUTF8StringEncoding];
+        return [NSC2DXString C2DXStringWithCC2DXString:C2DXString -> getCC2DXString() encoding:NSUTF8C2DXStringEncoding];
     }
     return NULL;
 }
@@ -204,9 +204,9 @@ C2DXArray* convertNSArrayToC2DXArray(NSArray *array)
         for (int i = 0; i < [array count]; i++)
         {
             id value = [array objectAtIndex:i];
-            if ([value isKindOfClass:[NSString class]])
+            if ([value isKindOfClass:[NSC2DXString class]])
             {
-                C2DXString *strValue = convertNSStringToC2DXString(value);
+                C2DXC2DXString *strValue = convertNSC2DXStringToC2DXC2DXString(value);
                 if (strValue)
                 {
                     ccArray -> addObject(strValue);
@@ -214,7 +214,7 @@ C2DXArray* convertNSArrayToC2DXArray(NSArray *array)
             }
             else if ([value isKindOfClass:[NSNumber class]])
             {
-                C2DXString *strValue = convertNSStringToC2DXString([NSString stringWithFormat:@"%@", value]);
+                C2DXC2DXString *strValue = convertNSC2DXStringToC2DXC2DXString([NSC2DXString C2DXStringWithFormat:@"%@", value]);
                 if (strValue)
                 {
                     ccArray -> addObject(strValue);
@@ -256,9 +256,9 @@ NSArray* convertC2DXArrayToNSArray(C2DXArray *array)
         for (int i = 0; i < array -> count(); i++)
         {
             C2DXObject * value = array -> C2DXObjectAtIndex(i);
-            if (dynamic_cast<C2DXString*>(value) != NULL)
+            if (dynamic_cast<C2DXC2DXString*>(value) != NULL)
             {
-                NSString *strValue = convertC2DXStringToNSString(dynamic_cast<C2DXString*>(value) );
+                NSC2DXString *strValue = convertC2DXC2DXStringToNSC2DXString(dynamic_cast<C2DXC2DXString*>(value) );
                 if (strValue)
                 {
                     [nsArray addObject:strValue];
@@ -293,17 +293,17 @@ void C2DXiOSMobLink::getMobId(C2DXMobLinkScene *scene, C2DXGetMobIdResultEvent c
 {
     const char *pathChar = scene->path.c_str();
     const char *sourceChar = scene->source.c_str();
-    NSString *path = [NSString stringWithCString:pathChar encoding:NSUTF8StringEncoding];
-    NSString *source = [NSString stringWithCString:sourceChar encoding:NSUTF8StringEncoding];
+    NSC2DXString *path = [NSC2DXString C2DXStringWithCC2DXString:pathChar encoding:NSUTF8C2DXStringEncoding];
+    NSC2DXString *source = [NSC2DXString C2DXStringWithCC2DXString:sourceChar encoding:NSUTF8C2DXStringEncoding];
     NSMutableDictionary *dict = convertC2DXDictionaryToNSDictionary(scene -> getCustomParams());
     
     MLSDKScene *theScene = [[MLSDKScene alloc] initWithMLSDKPath:path source:source params:dict]; 
     
-    [MobLink getMobId:theScene result:^(NSString *mobid) {
+    [MobLink getMobId:theScene result:^(NSC2DXString *mobid) {
        
         if (mobid)
         {
-            callback([mobid UTF8String]);
+            callback([mobid UTF8C2DXString]);
         }
     }];
 }
@@ -319,8 +319,8 @@ void C2DXiOSMobLink::resorteSceneCallBack(const char *path, const char *source, 
     scene -> path = path;
     scene -> source = source;
     
-    NSString *params = [NSString stringWithCString:paramsStr encoding:NSUTF8StringEncoding];
-    NSDictionary *dict = [MOBFJson objectFromJSONString:params];
+    NSC2DXString *params = [NSC2DXString C2DXStringWithCC2DXString:paramsStr encoding:NSUTF8C2DXStringEncoding];
+    NSDictionary *dict = [MOBFJson objectFromJSONC2DXString:params];
     scene -> setCustomParams(convertNSDictToCCDict(dict));
     restoreSceneCallBack(scene);
     

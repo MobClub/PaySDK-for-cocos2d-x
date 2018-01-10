@@ -28,11 +28,11 @@
 
 - (void)IMLSDKWillRestoreScene:(MLSDKScene *)scene Restore:(void (^)(BOOL isRestore, RestoreStyle style))restoreHandler
 {
-    NSString *path = scene.path;
-    NSString *source = scene.source;
-    NSString *customStr = [MOBFJson jsonStringFromObject:scene.params];
+    NSC2DXString *path = scene.path;
+    NSC2DXString *source = scene.source;
+    NSC2DXString *customStr = [MOBFJson jsonC2DXStringFromObject:scene.params];
     
-    C2DXiOSMobLink::resorteSceneCallBack([path UTF8String], [source UTF8String], [customStr UTF8String]);
+    C2DXiOSMobLink::resorteSceneCallBack([path UTF8C2DXString], [source UTF8C2DXString], [customStr UTF8C2DXString]);
     
     restoreHandler(NO, Default);
 }

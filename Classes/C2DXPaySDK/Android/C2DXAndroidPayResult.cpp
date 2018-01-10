@@ -19,10 +19,10 @@ void C2DXAndroidActionListener::onResult(const char* result)
 {
     CCJSONConverter* json = CCJSONConverter::sharedConverter();
     C2DXDictionary* dic = json->dictionaryFrom(result);
-    CCString* modId = (CCString*) dic->objectForKey("mobID");
+    CCC2DXString* modId = (CCC2DXString*) dic->objectForKey("mobID");
     C2DXGetMobIdResultEvent prt = getModIdCallBack;
     if (prt) {
-        prt(modId->getCString());
+        prt(modId->getCC2DXString());
     }
     dic->release();
 }
