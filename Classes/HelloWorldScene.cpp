@@ -94,7 +94,7 @@ bool HelloWorld::init()
 //                C2DXMobLink::getMobId(scene, getMobIdHandler);
 
 //                C2DXMobPayApi* api =  C2DXPaySDK::createMobPayAPI<C2DXMobPayApi>();
-                C2DXAliPayApi<C2DXPayOrder>* api = C2DXPaySDK::createMobPayAPI<C2DXAliPayApi<C2DXPayOrder>>();
+                C2DXAliPayApi* api = C2DXPaySDK::createMobPayAPI<C2DXAliPayApi>();
 
 
             }

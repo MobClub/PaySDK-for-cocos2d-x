@@ -20,7 +20,8 @@ C2DXAndroidOnPayListener::C2DXAndroidOnPayListener()
 }
 
 
-void C2DXAndroidOnPayListener::setOnPayListener(C2DXOnPayListener* callback)
+template <typename O, typename API>
+void C2DXAndroidOnPayListener::setOnPayListener(C2DXOnPayListener<O, API>* callback)
 {
     onPayListener = callback;
 }

@@ -4,7 +4,8 @@
 #include "C2DXAndroidOnPayListener.h"
 
 
-void C2DXAndroidAliApi::pay(C2DXPayOrder* order, C2DXOnPayListener* callback)
+template <class O>
+void C2DXAndroidAliApi::pay(O* order, C2DXOnPayListener<O, C2DXAliPayApi>* callback)
 {
     JvmJniEnv env;
     jobject jApi = getLocalJavaObject(env);
@@ -22,12 +23,6 @@ void C2DXAndroidAliApi::pay(C2DXPayOrder* order, C2DXOnPayListener* callback)
 
     env->CallVoidMethod(jApi, jApiPayMethod, jorder, jListener);
 }
-
-void C2DXAndroidAliApi::pay(C2DXTicketOrder* order, C2DXOnPayListener* callback)
-{
-
-}
-
 
 
 

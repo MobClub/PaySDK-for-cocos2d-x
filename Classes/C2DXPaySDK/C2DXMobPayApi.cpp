@@ -5,81 +5,45 @@
 
 using namespace mob::paysdk;
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-
+#if defined(ANDROID)
 #include "C2DXAndroidPayApi.h"
-
-#elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-// TODO handle ios
+#elif defined(CC_TARGET_OS_IPHONE)
+//TODO handle ios
 #endif
-
 
 C2DXAliPayApi* C2DXAliPayApi::create() {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#if defined(ANDROID)
     C2DXAndroidAliApi* api = C2DXAndroidAliApi::create();
     return (C2DXAliPayApi*)api;
-#elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    // TODO handle ios
+#elif defined(CC_TARGET_OS_IPHONE)
+    //TODO ios impl
 #endif
 }
 
-
-void C2DXAliPayApi::pay(C2DXPayOrder* order, C2DXOnPayListener* callback)
+template <class O> void C2DXAliPayApi::pay(O* order, C2DXOnPayListener<O, C2DXAliPayApi>* callback)
 {
-
+#if defined(ANDROID)
+    C2DXAndroidAliApi* api = (C2DXAndroidAliApi*)this;
+    api->pay(order, callback);
+#elif defined(CC_TARGET_OS_IPHONE)
+    //TODO ios impl
+#endif
 }
 
-void C2DXAliPayApi::pay(C2DXTicketOrder* order, C2DXOnPayListener* callback)
+template <class O> void C2DXWxPayApi::pay(O* order, C2DXOnPayListener<O, C2DXWxPayApi>* callback)
 {
 
 }
 
 
 C2DXWxPayApi* C2DXWxPayApi::create() {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    C2DXWxPayApi* api = C2DXAndroidWxApi::create();
+#if defined(ANDROID)
+    C2DXAndroidWxApi* api = C2DXAndroidWxApi::create();
     return (C2DXWxPayApi*)api;
-#elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    // TODO handle ios
+#elif defined(CC_TARGET_OS_IPHONE)
+    //TODO ios impl
 #endif
 }
-
-
-
-
-
-
-C2DXWxPayApi* C2DXWxPayApi::create() {
-
-}
-
-
-virtual void pay(C2DXPayOrder* order, C2DXOnPayListener* callback);
-virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener* callback);
-
-class C2DXAliPayApi : C2DXMobPayApi {
-private:
-    C2DXAliPayApi();
-public:
-    CREATE_INSTANCE_FUNC(C2DXAliPayApi);
-    virtual void pay(C2DXPayOrder* order, C2DXOnPayListener* callback);
-    virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener* callback);
-public:
-    virtual ~C2DXAliPayApi();
-};
-
-
-class C2DXWxPayApi : C2DXMobPayApi {
-private:
-    C2DXWxPayApi();
-public:
-    CREATE_INSTANCE_FUNC(C2DXWxPayApi);
-    virtual void pay(C2DXPayOrder* order, C2DXOnPayListener* callback);
-    virtual void pay(C2DXTicketOrder* order, C2DXOnPayListener* callback)
-
-public:
-    virtual ~C2DXWxPayApi();
-};
 
 
 

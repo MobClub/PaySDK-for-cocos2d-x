@@ -10,15 +10,15 @@ namespace mob
 {
     namespace paysdk
     {
-        template
-        class C2DXAndroidOnPayListener : C2DXCxxJavaObject {
+        class C2DXAndroidOnPayListener : public C2DXCxxJavaObject {
         public:
             CREATE_INSTANCE_FUNC(C2DXAndroidOnPayListener);
         public:
             C2DXAndroidOnPayListener();
 
         public:
-            void setOnPayListener(C2DXOnPayListener* callback);
+            template <typename O, typename API>
+            void setOnPayListener(C2DXOnPayListener<O, API>* callback);
 
 
 
@@ -26,9 +26,9 @@ namespace mob
 //            void onPayEnd(C2DXPayResult* payResult, O* order, API* api);
 
         private:
-            C2DXOnPayListener* onPayListener;
+            void* onPayListener;
         public:
-            virtual ~C2DXAndroidAliApi();
+            virtual ~C2DXAndroidOnPayListener();
         };
     }
 }

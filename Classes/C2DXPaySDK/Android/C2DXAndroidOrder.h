@@ -13,7 +13,7 @@ namespace mob
     namespace paysdk
     {
 
-        class C2DXAndroidPayOrder : public C2DXPayOrder, C2DXCxxJavaObject
+        class C2DXAndroidPayOrder : public C2DXPayOrder, public C2DXCxxJavaObject
         {
         public:
             CREATE_INSTANCE_FUNC(C2DXAndroidPayOrder);

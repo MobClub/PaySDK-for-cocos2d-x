@@ -1,19 +1,8 @@
 #ifndef __C2DXPAYSDKBRIDGE__C2DXCXXJAVAOBJECT__
 #define __C2DXPAYSDKBRIDGE__C2DXCXXJAVAOBJECT__
 
-//#include <stdio.h>
-//#include "C2DXMobLinkTypeDef.h"
-//
-//
-//#define CREATE_INSTANCE_FUNC(__TYPE__) \
-//static __TYPE__* create() \
-//{
-//}
-
-#include "jni/JniHelper.h"
+#include "JvmJniEnv.h"
 #include <iostream>
-
-using std::C2DXString;
 
 namespace mob
 {
@@ -50,7 +39,7 @@ namespace mob
             static jclass getJavaClass(JNIEnv* env, jobject jo);
             static jmethodID getJavaMethodID(JNIEnv*, jclass, const char*, const char*);
             /**
-             * 释放此对象, 应该经常调用此函数而不是delete
+             * 释放此对象
              */
             virtual void release();
         public:
@@ -58,9 +47,6 @@ namespace mob
         private:
             jobject globelJavaObject;
         };
-
-
-
     }
 }
 

@@ -1,9 +1,6 @@
-
-
 #include "C2DXCxxJavaObject.h"
 
 using namespace mob::paysdk;
-
 
 jobject C2DXCxxJavaObject::newJavaInstance(JNIEnv* env, const char* clazz)
 {
@@ -60,8 +57,6 @@ jobject C2DXCxxJavaObject::getJavaObject()
 
 C2DXCxxJavaObject::~C2DXCxxJavaObject()
 {
-// TODO 实现此函数
-//    detachJavaObject(NULL);
 }
 
 
