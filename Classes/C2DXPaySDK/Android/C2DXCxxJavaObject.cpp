@@ -8,8 +8,17 @@ using namespace mob::paysdk;
 jobject C2DXCxxJavaObject::newJavaInstance(JNIEnv* env, const char* clazz)
 {
     jclass jclazz = env->FindClass(clazz);
-    jobject jret = env->AllocObject(jclazz);
-    return jret;
+    return env->AllocObject(jclazz);
+}
+
+jclass C2DXCxxJavaObject::getJavaClass(JNIEnv* env, jobject jo)
+{
+    return env->GetObjectClass(jo);
+}
+
+jmethodID C2DXCxxJavaObject::getJavaMethodID(JNIEnv* env, jclass clazz, const char* name, const char* sig)
+{
+    return env->GetMethodID(clazz, name, sig);
 }
 
 C2DXCxxJavaObject::C2DXCxxJavaObject()

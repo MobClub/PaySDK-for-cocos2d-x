@@ -1,34 +1,29 @@
 package com.mob.paysdk.cocos2dx;
 
-import com.mob.paysdk.PayOrder;
-import com.mob.paysdk.TicketOrder;
+import com.mob.paysdk.AliPayAPI;
+import com.mob.paysdk.PaySDK;
 
 /**
  * Created by litl on 2018/1/3.
  */
 
-public class JavaCxxObject extends Object {
-
-
+public abstract class JavaCxxObject extends Object {
 
     private int cxxObject;
 
-
-    private void jniAttachCxxObject(int pointer) {
-
+    protected void attachCxxObject(int pointer) {
+        cxxObject = pointer;
     }
 
-    private void jniDetachCxxObject(int pointer) {
-
-
-        PayOrder p;
-        p.getOrderNo()
-
-
+    protected int getCxxObject() {
+        return cxxObject;
     }
 
+    protected void detachCxxObject(int pointer) {
+        cxxObject = 0;
+    }
 
-
-
-
+    private int jniGetCxxObject() {
+        return getCxxObject();
+    }
 }

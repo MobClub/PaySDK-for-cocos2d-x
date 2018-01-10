@@ -20,49 +20,32 @@ public class OnPayListener<T> extends JavaCxxObject implements com.mob.paysdk.On
 
 	public OnPayListener() {
 		super();
-//		cxxObject = nativeOnCreateCxxObject();
+		int pointer = nativeOnCreateCxxObject(0);
+		attachCxxObject(pointer);
 	}
-
-//	@Override
-//	public void onResult(HashMap<String, Object> params) {
-//		JSONObject json = new JSONObject(params);
-//		String value = json.toString();
-//		nativeOnResult(value);
-//	}
-//
-//	@Override
-//	public void onError(Throwable t) {
-//		JSONObject json = new JSONObject();
-//		String value = json.toString();
-//		nativeOnError(value);
-//	}
 
 	@Override
 	protected void finalize() throws Throwable {
 		super.finalize();
-//		nativeOnDestoryCxxObject();
+		int pointer = getCxxObject();
+		detachCxxObject(0);
+		nativeOnDestoryCxxObject(pointer);
 	}
-
-//	private native int nativeOnCreateCxxObject();
-//	private native int nativeOnResult(String string);
-//	private native int nativeOnError(String string);
-//	private native int nativeOnDestoryCxxObject();
-//
-//	public int getCxxObject() {
-//		return cxxObject;
-//	}
-//
-//	public static ActionListener newInstance() {
-//		return new ActionListener();
-//	}
 
 	@Override
 	public boolean onWillPay(String s, T t, MobPayAPI mobPayAPI) {
-		return false;
+		int cxxThis = getCxxObject();
+		return nativeOnWillPay(cxxThis, s, t, mobPayAPI);
 	}
 
 	@Override
 	public void onPayEnd(PayResult payResult, T t, MobPayAPI mobPayAPI) {
-
+		int cxxThis = getCxxObject();
+		nativeOnPayEnd(cxxThis, payResult, t, mobPayAPI);
 	}
+
+	private native int nativeOnCreateCxxObject(int p);
+	private native boolean nativeOnWillPay(int cxxThis, String s, T t, MobPayAPI mobPayAPI);
+	private native void nativeOnPayEnd(int cxxThis, PayResult payResult, T t, MobPayAPI mobPayAPI);
+	private native int nativeOnDestoryCxxObject(int p);
 }

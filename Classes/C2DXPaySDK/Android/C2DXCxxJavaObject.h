@@ -22,7 +22,7 @@ namespace mob
         class C2DXCxxJavaObject {
         protected:
             C2DXCxxJavaObject();
-
+        public:
             /**
              * 附加javaObject对象到this对象
              * @param lRef javaObject的引用
@@ -46,8 +46,13 @@ namespace mob
              * @return javaObject的本地引用
              */
             jobject getLocalJavaObject(JNIEnv* env);
-        public:
             static jobject newJavaInstance(JNIEnv* env, const char* clazz);
+            static jclass getJavaClass(JNIEnv* env, jobject jo);
+            static jmethodID getJavaMethodID(JNIEnv*, jclass, const char*, const char*);
+            /**
+             * 释放此对象, 应该经常调用此函数而不是delete
+             */
+            virtual void release();
         public:
             virtual ~C2DXCxxJavaObject();
         private:
