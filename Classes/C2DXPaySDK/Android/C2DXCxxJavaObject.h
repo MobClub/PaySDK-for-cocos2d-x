@@ -3,7 +3,9 @@
 
 #include "JvmJniEnv.h"
 #include <iostream>
+#include "map"
 
+using namespace std;
 namespace mob
 {
     namespace paysdk
@@ -42,11 +44,20 @@ namespace mob
              * 释放此对象
              */
             virtual void release();
+
+        protected:
+
+            /**
+             * 从映射表中找到java对象对应的cxx对象
+             * @param env
+             * @return
+             */
+            static C2DXCxxJavaObject* findCxxJavaObject(JNIEnv* env, jobject);
         public:
             virtual ~C2DXCxxJavaObject();
-        private:
-            jobject globelJavaObject;
         };
+
+        static map<C2DXCxxJavaObject*, jobject> cxxJavaMap;
     }
 }
 

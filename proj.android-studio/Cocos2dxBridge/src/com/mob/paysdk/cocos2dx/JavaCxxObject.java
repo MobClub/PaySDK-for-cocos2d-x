@@ -16,7 +16,17 @@ public abstract class JavaCxxObject extends Object {
         cxxObject = 0;
     }
 
-    private int jniGetCxxObject() {
+    protected void jniAttachCxxObject(int pointer) {
+        attachCxxObject(pointer);
+    }
+
+    protected int jniGetCxxObject() {
         return getCxxObject();
     }
+
+
+    protected void jniDetachCxxObject(int pointer) {
+        detachCxxObject(pointer);
+    }
+
 }

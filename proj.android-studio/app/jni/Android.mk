@@ -22,7 +22,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes
 
 LOCAL_STATIC_LIBRARIES := cocos2dx_static
 
-LOCAL_WHOLE_STATIC_LIBRARIES := moblink_bridge
+LOCAL_WHOLE_STATIC_LIBRARIES := paysdk_bridge
 
 include $(BUILD_SHARED_LIBRARY)
 

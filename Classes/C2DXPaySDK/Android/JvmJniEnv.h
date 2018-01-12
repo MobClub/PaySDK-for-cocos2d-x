@@ -18,7 +18,7 @@ namespace mob
             };
 
             operator JNIEnv*() {
-                return (JNIEnv*)NULL;
+                return env;
             };
 
             JNIEnv* operator->() {

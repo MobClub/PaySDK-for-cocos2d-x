@@ -3,6 +3,9 @@
 
 #include "C2DXCxxJavaObject.h"
 #include "C2DXPaySDK.h"
+#include "JvmJniEnv.h"
+#include "C2DXOrder.h"
+#include "C2DXPayApi.h"
 
 using namespace mob::paysdk;
 
@@ -10,29 +13,66 @@ namespace mob
 {
     namespace paysdk
     {
+        template <typename O, typename API>
         class C2DXAndroidOnPayListener : public C2DXCxxJavaObject {
         public:
-            CREATE_INSTANCE_FUNC(C2DXAndroidOnPayListener);
-        public:
-            C2DXAndroidOnPayListener();
+            static C2DXAndroidOnPayListener<O, API>* create()
+            {
+                JvmJniEnv env;
+                jobject object = newJavaInstance(env, "com/mob/paysdk/cocos2dx/OnPayListener");
+                jclass jclazz = getJavaClass(env, object);
+                C2DXAndroidOnPayListener<O, API>* cxxOjbect = new C2DXAndroidOnPayListener<O, API>();
 
+                jmethodID jMethod = getJavaMethodID(env, jclazz, "jniAttachCxxObject", "(I)V");
+                env->CallVoidMethod(object, jMethod, (jint)cxxOjbect);
+                cxxOjbect->attachJavaObject(env, object);
+                return cxxOjbect;
+            }
         public:
-            template <typename O, typename API>
+            C2DXAndroidOnPayListener()
+            {
+                onPayListener = NULL;
+            }
+        public:
             void setOnPayListener(C2DXOnPayListener<O, API>* callback)
             {
                 onPayListener = callback;
             }
-
-
-
-//            void onWillPay(C2DXString ticketId, O* order, API* api);
-//            void onPayEnd(C2DXPayResult* payResult, O* order, API* api);
-
+            bool onWillPay(JNIEnv *env, jstring jTicketId, jobject jOrder, jobject jApi)
+            {
+                C2DXOnPayListener<O, API>* callback = onPayListener;
+                if (NULL != callback) {
+                    const char* cxxTicketId = env->GetStringUTFChars(jTicketId, NULL);
+                    C2DXString ticketId = cxxTicketId;
+                    env->ReleaseStringUTFChars(jTicketId, cxxTicketId);
+                    O* order = (O*)findCxxJavaObject(env, jOrder);
+                    API* api = (API*)findCxxJavaObject(env, jApi);
+                    return callback->onWillPay(ticketId, order, api);
+                } else {
+                    return false;
+                }
+            }
+            void onPayEnd(JNIEnv *env, jint jResult, jobject jOrder, jobject jApi)
+            {
+                C2DXOnPayListener<O, API>* callback = onPayListener;
+                if (NULL != callback) {
+                    C2DXPayResult* result = new C2DXPayResult();
+                    result->setPayStatus(jResult);
+                    O* order = (O*)findCxxJavaObject(env, jOrder);
+                    API* api = (API*)findCxxJavaObject(env, jApi);
+                    return callback->onPayEnd(result, order, api);
+                }
+            }
         private:
-            void* onPayListener;
+            C2DXOnPayListener<O, API>* onPayListener;
         public:
-            virtual ~C2DXAndroidOnPayListener();
+            virtual ~C2DXAndroidOnPayListener()
+            {
+            }
         };
+
+        bool androidOnWillPay(JNIEnv *env, C2DXCxxJavaObject* cxx, jstring jTicketId, jobject jOrder, jobject jApi);
+        bool androidOnPayEnd(JNIEnv *env, C2DXCxxJavaObject* cxx, jint jResult, jobject jOrder, jobject jApi);
     }
 }
 

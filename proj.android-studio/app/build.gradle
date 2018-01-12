@@ -49,10 +49,7 @@ android {
 
     externalNativeBuild {
         ndkBuild {
-            if (!project.hasProperty("PROP_NDK_MODE") || PROP_NDK_MODE.compareTo('none') != 0) {
-                // skip the NDK Build step if PROP_NDK_MODE is none
-                path "jni/Android.mk"
-            }
+            path "jni/Android.mk"
         }
     }
 
@@ -92,5 +89,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':libcocos2dx')
-    compile project(':Cocos2dxBridge')
+    releaseCompile project(path: ':Cocos2dxBridge', configuration: 'release')
+    debugCompile project(path: ':Cocos2dxBridge', configuration: 'debug')
 }

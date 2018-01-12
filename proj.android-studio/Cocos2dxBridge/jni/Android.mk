@@ -4,8 +4,8 @@ include $(CLEAR_VARS)
 
 COCOS2D_ROOT := ../../../cocos2d
 
-LOCAL_MODULE := moblink_bridge
-LOCAL_MODULE_FILENAME := libmoblinbridge
+LOCAL_MODULE := paysdk_bridge
+#LOCAL_MODULE_FILENAME := libmoblinbridge
 
 ifeq ($(USE_ARM_MODE),1)
 LOCAL_ARM_MODE := arm

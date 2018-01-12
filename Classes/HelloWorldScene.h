@@ -8,7 +8,7 @@ using namespace std;
 //using namespace mob::paysdk;
 #include "C2DXPaySDKTypeDef.h"
 
-class HelloWorld : public cocos2d::Scene , public C2DXOnPayListener<C2DXPayOrder, C2DXAliPayApi>
+class HelloWorld : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
@@ -22,10 +22,18 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
+};
 
+
+
+class OnPayListener : public C2DXOnPayListener<C2DXPayOrder, C2DXAliPayApi>
+{
+public:
     virtual bool onWillPay(C2DXString ticketId, C2DXPayOrder* order, C2DXAliPayApi* api);
     virtual void onPayEnd(C2DXPayResult* payResult, C2DXPayOrder* order, C2DXAliPayApi* api);
 
+    HelloWorld* outer;
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif
+

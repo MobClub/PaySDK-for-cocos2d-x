@@ -8,6 +8,8 @@ typedef std::string C2DXString;
 
 #include "C2DXPayResult.h"
 
+//type_info
+
 namespace mob
 {
     namespace paysdk

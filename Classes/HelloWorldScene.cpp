@@ -82,12 +82,14 @@ bool HelloWorld::init()
                 break;
             case ui::Widget::TouchEventType::ENDED: {
                 C2DXPayOrder* order = C2DXPayOrder::create();
-                order->setOrderNo(StringUtils::toString(clock()));
+                order->setOrderNo("01");
                 order->setAmount(1);
                 order->setSubject("subject");
                 order->setBody("body");
                 C2DXAliPayApi* api = C2DXPaySDK::createMobPayAPI<C2DXAliPayApi>();
-                api->pay(order, this);
+
+                C2DXOnPayListener<C2DXPayOrder, C2DXAliPayApi>* l = new OnPayListener();
+                api->pay(order, l);
 
             }
                 break;
@@ -118,12 +120,12 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 }
 
 
-bool HelloWorld::onWillPay(C2DXString ticketId, C2DXPayOrder* order, C2DXAliPayApi* api)
+bool OnPayListener::onWillPay(C2DXString ticketId, C2DXPayOrder* order, C2DXAliPayApi* api)
 {
-
+    return false;
 }
 
-void HelloWorld::onPayEnd(C2DXPayResult* payResult, C2DXPayOrder* order, C2DXAliPayApi* api)
+void OnPayListener::onPayEnd(C2DXPayResult* payResult, C2DXPayOrder* order, C2DXAliPayApi* api)
 {
 
 }
