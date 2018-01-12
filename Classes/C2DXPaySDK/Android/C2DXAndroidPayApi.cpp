@@ -58,10 +58,28 @@ C2DXAndroidWxApi* C2DXAndroidWxApi::create()
 
 C2DXAndroidWxApi::C2DXAndroidWxApi()
 {
+    JvmJniEnv env;
+    jobject javaObject = newJavaInstance(env, "com/mob/paysdk/WXPayAPI");
+    attachJavaObject(env, javaObject);
 }
 
 void C2DXAndroidWxApi::pay(C2DXPayOrder* order, C2DXOnPayListener<C2DXPayOrder, C2DXWxPayApi>* callback)
 {
+    JvmJniEnv env;
+    jobject jApi = getLocalJavaObject(env);
+    jclass jApiClazz = getJavaClass(env, jApi);
+    jmethodID jApiPayMethod = getJavaMethodID(env, jApiClazz, "pay",
+                                              "(Lcom/mob/paysdk/Order;Lcom/mob/paysdk/OnPayListener;)V");
+
+
+    C2DXAndroidPayOrder* dOrder = (C2DXAndroidPayOrder*) order;
+    jobject jorder = dOrder->getLocalJavaObject(env);
+
+    C2DXAndroidOnPayListener<C2DXPayOrder, C2DXWxPayApi>* cxx = C2DXAndroidOnPayListener<C2DXPayOrder, C2DXWxPayApi>::create();
+    cxx->setOnPayListener(callback);
+    jobject jListener = cxx->getLocalJavaObject(env);
+
+    env->CallVoidMethod(jApi, jApiPayMethod, jorder, jListener);
 }
 
 

@@ -5,7 +5,6 @@
 
 USING_NS_CC;
 using namespace std;
-//using namespace mob::paysdk;
 #include "C2DXPaySDKTypeDef.h"
 
 class HelloWorld : public cocos2d::Scene
@@ -25,12 +24,22 @@ public:
 };
 
 
-
-class OnPayListener : public C2DXOnPayListener<C2DXPayOrder, C2DXAliPayApi>
+template <typename O, typename API>
+class OnPayListener : public C2DXOnPayListener<O, API>
 {
 public:
-    virtual bool onWillPay(C2DXString ticketId, C2DXPayOrder* order, C2DXAliPayApi* api);
-    virtual void onPayEnd(C2DXPayResult* payResult, C2DXPayOrder* order, C2DXAliPayApi* api);
+    OnPayListener(HelloWorld* out)
+    {
+        outer = out;
+    }
+    virtual bool onWillPay(C2DXString ticketId, O* order, API* api)
+    {
+        return false;
+    }
+    virtual void onPayEnd(C2DXPayResult* payResult, O* order, API* api)
+    {
+
+    }
 
     HelloWorld* outer;
 };

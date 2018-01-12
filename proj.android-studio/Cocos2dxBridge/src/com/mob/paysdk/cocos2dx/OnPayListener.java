@@ -1,9 +1,7 @@
 package com.mob.paysdk.cocos2dx;
 
 import com.mob.paysdk.MobPayAPI;
-import com.mob.paysdk.PayOrder;
 import com.mob.paysdk.PayResult;
-import com.mob.paysdk.TicketOrder;
 
 /**
  * OnPayListener for cocos2dx.<br/>
@@ -17,11 +15,6 @@ public class OnPayListener<T> extends JavaCxxObject implements com.mob.paysdk.On
 	@Override
 	public boolean onWillPay(String s, T t, MobPayAPI mobPayAPI) {
 		int cxxThis = getCxxObject();
-		if (t instanceof PayOrder) {
-
-		} else if (t instanceof TicketOrder) {
-
-		}
 		return nativeOnWillPay(cxxThis, s, t, mobPayAPI);
 	}
 

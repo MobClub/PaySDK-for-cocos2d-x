@@ -74,7 +74,7 @@ bool HelloWorld::init()
 
     auto button = Button::create();
     button->setTitleText("PayWithAli");
-    button->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    button->setPosition(Vec2(visibleSize.width/2 + origin.x, label->getPosition().y - 100));
     button->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
         switch (type)
         {
@@ -88,7 +88,34 @@ bool HelloWorld::init()
                 order->setBody("body");
                 C2DXAliPayApi* api = C2DXPaySDK::createMobPayAPI<C2DXAliPayApi>();
 
-                C2DXOnPayListener<C2DXPayOrder, C2DXAliPayApi>* l = new OnPayListener();
+                C2DXOnPayListener<C2DXPayOrder, C2DXAliPayApi>* l = new OnPayListener<C2DXPayOrder, C2DXAliPayApi>(this);
+                api->pay(order, l);
+
+            }
+                break;
+            default:
+                break;
+        }
+    });
+    this->addChild(button);
+
+
+    button = Button::create();
+    button->setTitleText("PayWithWx");
+    button->setPosition(Vec2(visibleSize.width/2 + origin.x, label->getPosition().y - 120));
+    button->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
+        switch (type)
+        {
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED: {
+                C2DXPayOrder* order = C2DXPayOrder::create();
+                order->setOrderNo("01");
+                order->setAmount(1);
+                order->setSubject("subject");
+                order->setBody("body");
+                C2DXWxPayApi* api = C2DXPaySDK::createMobPayAPI<C2DXWxPayApi>();
+                C2DXOnPayListener<C2DXPayOrder, C2DXWxPayApi>* l = new OnPayListener<C2DXPayOrder, C2DXWxPayApi>(this);
                 api->pay(order, l);
 
             }
@@ -117,15 +144,4 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     //_eventDispatcher->dispatchEvent(&customEndEvent);
     
     
-}
-
-
-bool OnPayListener::onWillPay(C2DXString ticketId, C2DXPayOrder* order, C2DXAliPayApi* api)
-{
-    return false;
-}
-
-void OnPayListener::onPayEnd(C2DXPayResult* payResult, C2DXPayOrder* order, C2DXAliPayApi* api)
-{
-
 }
