@@ -9,14 +9,6 @@ Scene* HelloWorld::createScene()
     return HelloWorld::create();
 }
 
-void getMobIdHandler(const char * mobid)
-{
-    log("result - mobid = %s", mobid);
-    std::string content = "mobId:";
-    content += mobid;
-    MessageBox(content.c_str(), "获取MobId的回调");
-}
-
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
@@ -74,7 +66,7 @@ bool HelloWorld::init()
 
     auto button = Button::create();
     button->setTitleText("PayWithAli");
-    button->setPosition(Vec2(visibleSize.width/2 + origin.x, label->getPosition().y - 100));
+    button->setPosition(Vec2(visibleSize.width/2 + origin.x, label->getPosition().y - 80));
     button->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
         switch (type)
         {

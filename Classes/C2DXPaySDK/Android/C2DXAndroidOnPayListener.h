@@ -40,6 +40,7 @@ namespace mob
             }
             bool onWillPay(JNIEnv *env, jstring jTicketId, jobject jOrder, jobject jApi)
             {
+                bool handled = false;
                 C2DXOnPayListener<O, API>* callback = onPayListener;
                 if (NULL != callback) {
                     const char* cxxTicketId = env->GetStringUTFChars(jTicketId, NULL);
@@ -47,10 +48,9 @@ namespace mob
                     env->ReleaseStringUTFChars(jTicketId, cxxTicketId);
                     O* order = (O*)findCxxJavaObject(env, jOrder);
                     API* api = (API*)findCxxJavaObject(env, jApi);
-                    return callback->onWillPay(ticketId, order, api);
-                } else {
-                    return false;
+                    handled = callback->onWillPay(ticketId, order, api);
                 }
+                return handled;
             }
             void onPayEnd(JNIEnv *env, jint jResult, jobject jOrder, jobject jApi)
             {
@@ -60,8 +60,9 @@ namespace mob
                     result->setPayStatus(jResult);
                     O* order = (O*)findCxxJavaObject(env, jOrder);
                     API* api = (API*)findCxxJavaObject(env, jApi);
-                    return callback->onPayEnd(result, order, api);
+                    callback->onPayEnd(result, order, api);
                 }
+                detachJavaObject(env, NULL);
             }
         private:
             C2DXOnPayListener<O, API>* onPayListener;

@@ -38,7 +38,10 @@ public:
     }
     virtual void onPayEnd(C2DXPayResult* payResult, O* order, API* api)
     {
-
+        // TODO 支付结束
+        delete order;
+        delete api;
+        delete payResult;
     }
 
     HelloWorld* outer;

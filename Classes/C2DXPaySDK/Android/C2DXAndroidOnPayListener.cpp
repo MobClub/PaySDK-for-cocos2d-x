@@ -28,6 +28,7 @@ bool mob::paysdk::androidOnPayEnd(JNIEnv *env, C2DXCxxJavaObject* cxx, jint jRes
     ANDROIDONPAYEND(cxx, PayOrderWx, env, jResult, jOrder, jApi);
     ANDROIDONPAYEND(cxx, TicketOrderAli, env, jResult, jOrder, jApi);
     ANDROIDONPAYEND(cxx, TicketOrderWx, env, jResult, jOrder, jApi);
+    delete cxx;
 };
 
 

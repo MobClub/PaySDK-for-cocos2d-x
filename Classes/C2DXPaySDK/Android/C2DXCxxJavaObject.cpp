@@ -62,6 +62,14 @@ void C2DXCxxJavaObject::release()
 
 C2DXCxxJavaObject* C2DXCxxJavaObject::findCxxJavaObject(JNIEnv* env, jobject jObject)
 {
+    map<C2DXCxxJavaObject*, jobject>::iterator it;
+    it = cxxJavaMap.begin();
+    while(it != cxxJavaMap.end()) {
+        if (env->IsSameObject(jObject, it->second)) {
+            return it->first;
+        }
+        it++;
+    }
     return NULL;
 }
 
