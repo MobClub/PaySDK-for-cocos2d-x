@@ -4,8 +4,8 @@
 #include "C2DXCxxJavaObject.h"
 #include "C2DXPaySDK.h"
 #include "JvmJniEnv.h"
-#include "C2DXOrder.h"
-#include "C2DXPayApi.h"
+#include "C2DXAndroidOrder.h"
+#include "C2DXAndroidPayApi.h"
 
 using namespace mob::paysdk;
 
@@ -46,8 +46,8 @@ namespace mob
                     const char* cxxTicketId = env->GetStringUTFChars(jTicketId, NULL);
                     C2DXString ticketId = cxxTicketId;
                     env->ReleaseStringUTFChars(jTicketId, cxxTicketId);
-                    O* order = (O*)findCxxJavaObject(env, jOrder);
-                    API* api = (API*)findCxxJavaObject(env, jApi);
+                    O* order = dynamic_cast<O*>(findCxxJavaObject(env, jOrder));
+                    API* api = dynamic_cast<API*>(findCxxJavaObject(env, jApi));
                     handled = callback->onWillPay(ticketId, order, api);
                 }
                 return handled;
@@ -58,9 +58,11 @@ namespace mob
                 if (NULL != callback) {
                     C2DXPayResult* result = new C2DXPayResult();
                     result->setPayStatus(jResult);
-                    O* order = (O*)findCxxJavaObject(env, jOrder);
-                    API* api = (API*)findCxxJavaObject(env, jApi);
+                    O* order = dynamic_cast<O*>(findCxxJavaObject(env, jOrder));
+                    API* api = dynamic_cast<API*>(findCxxJavaObject(env, jApi));
                     callback->onPayEnd(result, order, api);
+                    delete order;
+                    delete api;
                 }
                 detachJavaObject(env, NULL);
             }

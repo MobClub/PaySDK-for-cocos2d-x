@@ -21,6 +21,8 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
+    std::string getOutOrderNO();
+
 };
 
 
@@ -39,9 +41,6 @@ public:
     virtual void onPayEnd(C2DXPayResult* payResult, O* order, API* api)
     {
         // TODO 支付结束
-        delete order;
-        delete api;
-        delete payResult;
     }
 
     HelloWorld* outer;

@@ -74,7 +74,7 @@ bool HelloWorld::init()
                 break;
             case ui::Widget::TouchEventType::ENDED: {
                 C2DXPayOrder* order = C2DXPayOrder::create();
-                order->setOrderNo("01");
+                order->setOrderNo(getOutOrderNO());
                 order->setAmount(1);
                 order->setSubject("subject");
                 order->setBody("body");
@@ -102,7 +102,7 @@ bool HelloWorld::init()
                 break;
             case ui::Widget::TouchEventType::ENDED: {
                 C2DXPayOrder* order = C2DXPayOrder::create();
-                order->setOrderNo("01");
+                order->setOrderNo(getOutOrderNO());
                 order->setAmount(1);
                 order->setSubject("subject");
                 order->setBody("body");
@@ -136,4 +136,9 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     //_eventDispatcher->dispatchEvent(&customEndEvent);
     
     
+}
+
+std::string HelloWorld::getOutOrderNO()
+{
+    return StringUtils::format("%ld", clock());
 }
