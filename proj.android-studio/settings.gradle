@@ -1,4 +1,4 @@
-include ':libcocos2dx', ":Cocos2dxBridge", ":PaySDK"
+include ':libcocos2dx'
 project(':libcocos2dx').projectDir = new File(settingsDir, '../cocos2d/cocos/platform/android/libcocos2dx')
-include ':Cocos2DXForPaySDK'
-project(':Cocos2DXForPaySDK').projectDir = new File(settingsDir, 'app')
+include ':Cocos2D-For-PaySDK'
+project(':Cocos2D-For-PaySDK').projectDir = new File(settingsDir, 'app')

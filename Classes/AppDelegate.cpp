@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
-#include "C2DXPaySDK.h"
+//#include "C2DXPaySDK.h"
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -18,7 +18,7 @@ using namespace CocosDenshion;
 #endif
 
 USING_NS_CC;
-using namespace mob::paysdk;
+//using namespace mob::paysdk;
 static cocos2d::Size designResolutionSize = cocos2d::Size(480, 320);
 static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
 static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);

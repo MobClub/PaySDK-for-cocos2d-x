@@ -1,36 +1,125 @@
-#ifndef __C2DXPAYSDKBRIDGE__C2DXPAYSDK__
-#define __C2DXPAYSDKBRIDGE__C2DXPAYSDK__
+//
+//  C2DXPaySDK.hpp
+//  Cocos2D-For-PaySDK-mobile
+//
+//  Created by Max on 2018/1/26.
+//
 
-#define CREATE_INSTANCE_FUNC(__TYPE__) \
-static __TYPE__* create()
+#ifndef C2DXPaySDK_h
+#define C2DXPaySDK_h
 
-typedef std::string C2DXString;
+#include <stdio.h>
 
-#include "C2DXPayResult.h"
-
-//type_info
-
-namespace mob
+namespace paysdk
 {
-    namespace paysdk
+    //支付平台
+    enum C2DXPayChannel
     {
-        class C2DXPaySDK
-        {
-        public:
-            template <class API> static API* createMobPayAPI() {
-                return API::create();
-            }
-        };
-
-        template <class O, class API>
-        class C2DXOnPayListener
-        {
-        public:
-            virtual bool onWillPay(C2DXString ticketId, O* order, API* api) = 0;
-            virtual void onPayEnd(C2DXPayResult* payResult, O* order, API* api) = 0;
-        };
+        C2DXPayChannelWechat = 22,
+        C2DXPayChannelAlipay = 50
+    };
+    
+    //支付状态
+    enum C2DXPayStatus
+    {
+        C2DXPayStatusSuccess,
+        C2DXPayStatusFail,
+        C2DXPayStatusCancel
+    };
+    
+    //支付订单
+    class C2DXPayOrder
+    {
+    public:
+        /**
+         * 设置支付订单号 (必要）
+         */
+        std::string orderId;
         
-    }
-};
+        /**
+         * 支付金额, 单位：分.(必要）
+         */
+        int amount;
+        
+        /**
+         * 支付标题 (必要）
+         */
+        std::string subject;
+        
+        /**
+         * 支付主体 (可选）
+         */
+        std::string body;
+        
+        /**
+         * 描述 (可选）
+         */
+        std::string desc;
+        
+        /**
+         * 设置元数据 (可选）
+         */
+        std::string metadata;
+        
+        /**
+         * 商户用户Id (可选）
+         */
+        std::string appUserId;
+        
+        /**
+         * 商户用户昵称 (可选）
+         */
+        std::string appUserNickname;
+    };
+    
+    //支付结果监听
+    class C2DXPaySDKListener
+    {
+    public:
+        
+       /**
+        获取到ticketId准备支付
+        */
+       virtual bool onWillPay(std::string ticketId) = 0;
+        
+       /**
+        支付结果
+        */
+       virtual void onPayEnd(C2DXPayStatus status, std::string ticketId, int errorCode, std::string errorDes) = 0;
+    };
+    
+    //支付接口
+    class C2DXPaySDK
+    {
+    public:
+        /**
+         通过ticketId支付
 
-#endif
+         @param ticketId 支付
+         */
+        static void payWithTicketId(std::string ticketId, C2DXPayChannel channel, C2DXPaySDKListener *listener);
+        
+        /**
+         支付订单
+
+         @param order 通过
+         */
+        static void payWithOrder(C2DXPayOrder *order, C2DXPayChannel channel, C2DXPaySDKListener *listener);
+        
+        /**
+         开启debugLog iOS only
+
+         @param enableDebug 是否开启日志
+         */
+        static void setDebugMode(bool enableDebug);
+        
+        /**
+         获取版本号
+         
+         @return 版本号
+         */
+        static std::string getVersion();
+    };
+}
+
+#endif /* C2DXPaySDK_hpp */
