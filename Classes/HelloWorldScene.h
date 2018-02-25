@@ -6,7 +6,7 @@
 
 USING_NS_CC;
 using namespace std;
-using namespace paysdk;
+using namespace mob::paysdk;
 
 class HelloWorld : public cocos2d::Scene, public C2DXPaySDKListener
 {
@@ -24,6 +24,9 @@ public:
     //C2DXPaySDKListener
     bool onWillPay(std::string ticketId);
     void onPayEnd(C2DXPayStatus status, std::string ticketId, int errorCode, std::string errorDes);
+
+private:
+    std::string getOutOrderNO();
 };
 
 #endif

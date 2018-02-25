@@ -1,6 +1,7 @@
 #include <ui/UIButton.h>
 #include "HelloWorldScene.h"
 #include "C2DXPaySDK.h"
+#include "string"
 
 using namespace cocos2d::ui;
 Scene* HelloWorld::createScene()
@@ -35,7 +36,7 @@ bool HelloWorld::init()
             case ui::Widget::TouchEventType::ENDED: {
                 C2DXPayOrder *order = new C2DXPayOrder();
                 order -> subject = "orderSubject";
-                order -> orderId = std::to_string(arc4random());
+                order -> orderId = getOutOrderNO();
                 order -> amount = 1;
                 order -> body = "order_body";
                 order -> desc = "order_desc";
@@ -63,7 +64,7 @@ bool HelloWorld::init()
             case ui::Widget::TouchEventType::ENDED: {
                 C2DXPayOrder *order = new C2DXPayOrder();
                 order -> subject = "orderSubject";
-                order -> orderId = std::to_string(arc4random());
+                order -> orderId = getOutOrderNO();
                 order -> amount = 1;
                 order -> body = "order_body";
                 order -> desc = "order_desc";
@@ -82,15 +83,15 @@ bool HelloWorld::init()
     return true;
 }
 
-void HelloWorld::onPayEnd(paysdk::C2DXPayStatus status, std::string ticketId, int errorCode, std::string errorDes)
+void HelloWorld::onPayEnd(mob::paysdk::C2DXPayStatus status, std::string ticketId, int errorCode, std::string errorDes)
 {
     switch (status)
     {
-        case paysdk::C2DXPayStatusSuccess:
+        case mob::paysdk::C2DXPayStatusSuccess:
             printf("\n ---> 支付结果：success!,%s\n",ticketId.c_str());
             break;
         
-        case paysdk::C2DXPayStatusFail:
+        case mob::paysdk::C2DXPayStatusFail:
             printf("\n ---> 支付结果：fail!,%s,%s\n",ticketId.c_str(),errorDes.c_str());
             break;
             
@@ -103,7 +104,12 @@ void HelloWorld::onPayEnd(paysdk::C2DXPayStatus status, std::string ticketId, in
 bool HelloWorld::onWillPay(std::string ticketId)
 {
     printf("\n ---> 开始支付%s\n",ticketId.c_str());
-    
     return true;
+}
+
+
+std::string HelloWorld::getOutOrderNO()
+{
+    return StringUtils::format("%ld", clock());
 }
 

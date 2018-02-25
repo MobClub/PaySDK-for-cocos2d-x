@@ -3,39 +3,35 @@ import org.apache.tools.ant.taskdefs.condition.Os
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion PROP_COMPILE_SDK_VERSION.toInteger()
+    compileSdkVersion 16
     buildToolsVersion "25.0.0"
 
     defaultConfig {
         applicationId "com.paysdk.cocos2d"
-        minSdkVersion PROP_MIN_SDK_VERSION
-        targetSdkVersion PROP_TARGET_SDK_VERSION
+        minSdkVersion 10
+        targetSdkVersion 16
         versionCode 1
         versionName "1.0"
 
         externalNativeBuild {
             ndkBuild {
-                if (!project.hasProperty("PROP_NDK_MODE") || PROP_NDK_MODE.compareTo('none') != 0) {
-                    // skip the NDK Build step if PROP_NDK_MODE is none
-                    targets 'MyGame'
-                    arguments 'NDK_TOOLCHAIN_VERSION=4.9'
-                    arguments 'APP_PLATFORM=android-'+PROP_APP_PLATFORM
-                    
-                    def module_paths = [project.file("../../cocos2d").absolutePath,
-                                        project.file("../../cocos2d/cocos").absolutePath,
-                                        project.file("../../cocos2d/external").absolutePath]
-                    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-                        // should use '/'
-                        module_paths = module_paths.collect {it.replaceAll('\\\\', '/')}
-                        arguments 'NDK_MODULE_PATH=' + module_paths.join(";")
-                    }
-                    else {
-                        arguments 'NDK_MODULE_PATH=' + module_paths.join(':')
-                    }
-                    
-                    arguments '-j' + Runtime.runtime.availableProcessors()
-                    abiFilters.addAll(PROP_APP_ABI.split(':').collect{it as String})
+                targets 'MyGame'
+                arguments 'NDK_TOOLCHAIN_VERSION=4.9'
+                arguments 'APP_PLATFORM=android-16'
+
+                def module_paths = [project.file("../../cocos2d").absolutePath,
+                                    project.file("../../cocos2d/cocos").absolutePath,
+                                    project.file("../../cocos2d/external").absolutePath]
+                if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+                    module_paths = module_paths.collect {it.replaceAll('\\\\', '/')}
+                    arguments 'NDK_MODULE_PATH=' + module_paths.join(";")
                 }
+                else {
+                    arguments 'NDK_MODULE_PATH=' + module_paths.join(':')
+                }
+
+                arguments '-j' + Runtime.runtime.availableProcessors()
+                abiFilters "armeabi-v7a"
             }
         }
     }
@@ -49,10 +45,7 @@ android {
 
     externalNativeBuild {
         ndkBuild {
-            if (!project.hasProperty("PROP_NDK_MODE") || PROP_NDK_MODE.compareTo('none') != 0) {
-                // skip the NDK Build step if PROP_NDK_MODE is none
-                path "jni/Android.mk"
-            }
+            path "jni/Android.mk"
         }
     }
 
