@@ -10,16 +10,16 @@ buildscript {
 
     repositories {
         jcenter()
-        if (buildDepFromMaven) {
-            maven {
-                url mavenMobUrl
-            }
+        maven {
+            url mavenMobUrl
         }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
         if (buildDepFromMaven) {
             classpath 'com.mob.sdk:MobSDK:+'
+        } else {
+            classpath 'com.mob.eclipsemodule:EclipseModule:+'
         }
     }
 }
@@ -27,12 +27,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-    }
-    if (buildDepFromMaven) {
-        repositories {
-            maven {
-                url mavenMobUrl
-            }
+        maven {
+            url mavenMobUrl
         }
     }
 }
