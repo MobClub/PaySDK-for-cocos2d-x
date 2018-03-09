@@ -1,8 +1,11 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 
 apply plugin: 'com.android.library'
-apply from: '../PaySDK/build-mix.gradle'
+apply from: 'https://raw.githubusercontent.com/lity-lee/gradle/master/build-mix.gradle'
 
+if (buildDepFromMaven) {
+    apply plugin: 'com.mob.sdk'
+}
 
 android {
     publishNonDefault true
@@ -18,12 +21,13 @@ android {
         externalNativeBuild {
             ndkBuild {
                 arguments 'NDK_TOOLCHAIN_VERSION=4.9'
-                arguments 'APP_PLATFORM=android-16'
+                arguments 'APP_PLATFORM=android-' + findTargetSdk()
 
                 def module_paths = [project.file("../../cocos2d").absolutePath,
                                     project.file("../../cocos2d/cocos").absolutePath,
                                     project.file("../../cocos2d/external").absolutePath]
                 if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+                    // should use '/'
                     module_paths = module_paths.collect {it.replaceAll('\\\\', '/')}
                     arguments 'NDK_MODULE_PATH=' + module_paths.join(";")
                 }
@@ -88,5 +92,13 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':PaySDK')
+    if (buildDepFromMaven) {
+        MobSDK {
+            PaySDK {version = '1.0.0.1'}
+        }
+    } else {
+        compile project(':PaySDK')
+    }
+
+
 }
