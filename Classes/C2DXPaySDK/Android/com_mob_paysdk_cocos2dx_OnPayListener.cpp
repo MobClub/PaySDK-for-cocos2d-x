@@ -9,7 +9,7 @@
 JNIEXPORT jboolean JNICALL Java_com_mob_paysdk_cocos2dx_OnPayListener_nativeOnWillPay
   (JNIEnv *env, jobject, jint jcxx, jstring jTicketId, jobject jOrder, jobject jApi)
 {
-    C2DXCxxJavaObject* cxx = (C2DXCxxJavaObject*) jcxx;
+    void * cxx = (void *) jcxx;
     return mob::paysdk::androidOnWillPay(env, cxx, jTicketId, jOrder, jApi);
 }
 
@@ -21,6 +21,6 @@ JNIEXPORT jboolean JNICALL Java_com_mob_paysdk_cocos2dx_OnPayListener_nativeOnWi
 JNIEXPORT void JNICALL Java_com_mob_paysdk_cocos2dx_OnPayListener_nativeOnPayEnd
   (JNIEnv *env, jobject, jint jcxx, jint jResult, jobject jOrder, jobject jApi)
 {
-    C2DXCxxJavaObject* cxx = (C2DXCxxJavaObject*) jcxx;
+    void * cxx = (void *) jcxx;
     mob::paysdk::androidOnPayEnd(env, cxx, jResult, jOrder, jApi);
 }

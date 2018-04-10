@@ -1,6 +1,8 @@
 package com.mob.paysdk.cocos2dx;
 
-public abstract class JavaCxxObject extends Object {
+import com.mob.tools.proguard.EverythingKeeper;
+
+public abstract class JavaCxxObject extends Object implements EverythingKeeper {
 
     private int cxxObject;
 

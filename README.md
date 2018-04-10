@@ -2,7 +2,13 @@
 
 ## 下载并导入PaySDK
 
-下载[Cocos2dx-For-PaySDK](https://github.com/MobClub/PaySDK-for-cocos2d-x.git),下载完成后打开项目,将/Classes/C2DXPaySDK文件夹复制到您的cocos2dx项目/Classes目录下
+下载[Cocos2dx-For-PaySDK](https://github.com/MobClub/PaySDK-for-cocos2d-x.git)，clone整个repo可能会很慢，浪费您的时间，最好加上depth=1参数。
+
+```
+git clone -b master --depth=1 https://github.com/MobClub/PaySDK-for-cocos2d-x.git
+```
+
+下载完成后, 将/Classes/C2DXPaySDK文件夹复制到您的cocos2dx项目/Classes目录下。
 
 
 ## Android端接入
@@ -25,9 +31,6 @@ $(call import-module, jni)
 请参考原生Android平台的配置文件中的， gradle配置部分
 
 [原生MobPaySDK快速集成文档](http://wiki.mob.com/paysdk-%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90/)
-
-
-
 
 ## iOS端接入
 

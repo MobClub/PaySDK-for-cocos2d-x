@@ -1,11 +1,8 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 
 apply plugin: 'com.android.library'
-apply from: 'https://raw.githubusercontent.com/lity-lee/gradle/master/build-mix.gradle'
-
-if (buildDepFromMaven) {
-    apply plugin: 'com.mob.sdk'
-}
+apply from: 'build-mix.gradle'
+apply plugin: 'com.mob.sdk'
 
 android {
     publishNonDefault true
@@ -92,13 +89,13 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    if (buildDepFromMaven) {
-        MobSDK {
-            PaySDK {version = '1.0.0'}
-        }
-    } else {
+
+    Project p = findProject(':PaySDK')
+    if (null != p) {
         compile project(':PaySDK')
+    } else {
+        MobSDK {
+            PaySDK {version = '1.0.0.1'}
+        }
     }
-
-
 }

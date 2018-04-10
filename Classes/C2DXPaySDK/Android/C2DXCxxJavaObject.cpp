@@ -21,17 +21,22 @@ jmethodID C2DXCxxJavaObject::getJavaMethodID(JNIEnv* env, jclass clazz, const ch
 
 C2DXCxxJavaObject::C2DXCxxJavaObject()
 {
+    javaObjec = NULL;
 }
 
 void C2DXCxxJavaObject::attachJavaObject(JNIEnv* env, jobject lRef)
 {
-    jobject gRef = env->NewGlobalRef(lRef);
-    cxxJavaMap[this] = gRef;
+    jobject gRef = javaObjec;
+    if (NULL != gRef) {
+        detachJavaObject(env, lRef);
+    }
+    gRef = env->NewGlobalRef(lRef);
+	javaObjec = gRef;
 }
 
 jobject C2DXCxxJavaObject::getLocalJavaObject(JNIEnv* env)
 {
-    jobject gRef = cxxJavaMap[this];
+    jobject gRef = javaObjec;
     if (NULL == gRef) {
         return NULL;
     }
@@ -42,39 +47,22 @@ jobject C2DXCxxJavaObject::getLocalJavaObject(JNIEnv* env)
 
 void C2DXCxxJavaObject::detachJavaObject(JNIEnv* env, jobject lRef)
 {
-    jobject gRef = cxxJavaMap[this];
+    jobject gRef = javaObjec;
     if (NULL != gRef) {
         env->DeleteGlobalRef(gRef);
-        cxxJavaMap.erase(this);
+	    javaObjec = NULL;
     }
 }
 
 jobject C2DXCxxJavaObject::getJavaObject()
 {
-    return cxxJavaMap[this];
-}
-
-
-void C2DXCxxJavaObject::release()
-{
-
-}
-
-C2DXCxxJavaObject* C2DXCxxJavaObject::findCxxJavaObject(JNIEnv* env, jobject jObject)
-{
-    map<C2DXCxxJavaObject*, jobject>::iterator it;
-    it = cxxJavaMap.begin();
-    while(it != cxxJavaMap.end()) {
-        if (env->IsSameObject(jObject, it->second)) {
-            return it->first;
-        }
-        it++;
-    }
-    return NULL;
+    return javaObjec;
 }
 
 C2DXCxxJavaObject::~C2DXCxxJavaObject()
 {
+    JvmJniEnv jniEnv;
+    detachJavaObject(jniEnv, NULL);
 }
 
 

@@ -4,8 +4,6 @@ buildscript {
 
     ext {
         mavenMobUrl = "http://mvn.mob.com/android"
-//        mavenMobUrl = "http://10.18.97.47:8080/jenkins/job/iMaven/ws/android"
-        buildDepFromMaven = true
     }
 
     repositories {
@@ -16,11 +14,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
-        if (buildDepFromMaven) {
-            classpath 'com.mob.sdk:MobSDK:+'
-        } else {
-            classpath 'com.mob.eclipsemodule:EclipseModule:+'
-        }
+        classpath 'com.mob.sdk:MobSDK:+'
+        classpath 'com.mob.eclipsemodule:EclipseModule:+'
     }
 }
 

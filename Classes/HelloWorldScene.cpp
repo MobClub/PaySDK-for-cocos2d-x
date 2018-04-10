@@ -104,7 +104,7 @@ void HelloWorld::onPayEnd(mob::paysdk::C2DXPayStatus status, std::string ticketI
 bool HelloWorld::onWillPay(std::string ticketId)
 {
     printf("\n ---> 开始支付%s\n",ticketId.c_str());
-    return true;
+    return false;
 }
 
 
