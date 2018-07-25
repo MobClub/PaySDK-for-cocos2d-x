@@ -14,7 +14,7 @@
 #include "C2DXAndroidPaySDK.h"
 #endif
 
-using namespace mob::paysdk;
+using namespace ::paysdk;
 
 void C2DXPaySDK::payWithTicketId(std::string ticketId, C2DXPayChannel channel, C2DXPaySDKListener *listener)
 {

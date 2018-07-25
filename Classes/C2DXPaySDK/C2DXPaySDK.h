@@ -18,7 +18,8 @@ namespace mob {
         //支付平台
         enum C2DXPayChannel {
             C2DXPayChannelWechat = 22,
-            C2DXPayChannelAlipay = 50
+            C2DXPayChannelAlipay = 50,
+            C2DXPayChannelUnionPay = 53
         };
 
         //支付状态

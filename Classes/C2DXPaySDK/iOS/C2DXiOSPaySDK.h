@@ -12,6 +12,8 @@
 #include "cocos2d.h"
 #include "C2DXPaySDK.h"
 
+using namespace mob::paysdk;
+
 namespace paysdk
 {
     class C2DXiOSPaySDK

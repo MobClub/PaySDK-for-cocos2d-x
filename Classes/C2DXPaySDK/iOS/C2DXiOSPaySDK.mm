@@ -19,6 +19,9 @@ using namespace paysdk;
 
 @implementation C2DXPaySDKObserver
 
+//static C2DXPaySDKListener *_listener;
+
+
 + (instancetype)defaultObserver
 {
     static C2DXPaySDKObserver *_instance;
@@ -29,29 +32,47 @@ using namespace paysdk;
     return _instance;
 }
 
+#pragma mark - 支付完成回调
 - (void)paymentTransaction:(MPSPaymentTransaction *)transaction statusDidChange:(MPSPayStatus)status
 {
     switch (status) {
             
         case MPSPayStatusBegin: //说明已获取到ticketId开始吊起支付
-            C2DXiOSPaySDK::onWillPay(std::string(transaction.ticketId.UTF8String));
+        C2DXiOSPaySDK::onWillPay(std::string(transaction.ticketId.UTF8String));
             break;
             
         case MPSPayStatusSuccess://支付成功
-            C2DXiOSPaySDK::onPayEnd(C2DXPayStatusSuccess, std::string(transaction.ticketId.UTF8String), 0, NULL);
+            
+            C2DXiOSPaySDK::onPayEnd(C2DXPayStatusSuccess, std::string(transaction.ticketId.UTF8String), 0, std::string(@"".UTF8String));
             break;
             
         case MPSPayStatusCancel://取消支付
-            C2DXiOSPaySDK::onPayEnd(C2DXPayStatusFail, std::string(transaction.ticketId.UTF8String), (int)transaction.error.code, std::string(transaction.error.description.UTF8String));
+        {
+            NSString * str = @"";
+            if (transaction.error.description != nil)
+            {
+                str = transaction.error.description;
+            }
+            
+            C2DXiOSPaySDK::onPayEnd(C2DXPayStatusFail, std::string(transaction.ticketId.UTF8String), (int)transaction.error.code, std::string(str.UTF8String));
+        }
             break;
             
         default://支付失败
-            C2DXiOSPaySDK::onPayEnd(C2DXPayStatusCancel, std::string(transaction.ticketId.UTF8String), 0, NULL);
+            
+            NSString * str = @"";
+            if (transaction.ticketId.length > 0)
+            {
+                str = transaction.ticketId;
+            }
+            C2DXiOSPaySDK::onPayEnd(C2DXPayStatusCancel, std::string(str.UTF8String), 0, std::string(@"fail".UTF8String));
+            
             break;
     }
 }
 
 @end
+
 
 static C2DXPaySDKListener *_listener;
 
@@ -142,7 +163,7 @@ void C2DXiOSPaySDK::onWillPay(std::string ticketId)
     _listener -> onWillPay(ticketId);
 }
 
-void C2DXiOSPaySDK::onPayEnd(paysdk::C2DXPayStatus status, std::string ticketId, int errorCode, std::string errorDes)
+void C2DXiOSPaySDK::onPayEnd(C2DXPayStatus status, std::string ticketId, int errorCode, std::string errorDes)
 {
     _listener -> onPayEnd(status, ticketId, errorCode, errorDes);
 }
