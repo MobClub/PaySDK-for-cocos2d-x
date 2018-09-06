@@ -24,9 +24,10 @@ namespace mob {
 
         //支付状态
         enum C2DXPayStatus {
-            C2DXPayStatusSuccess,
-            C2DXPayStatusFail,
-            C2DXPayStatusCancel
+            C2DXPayStatusSuccess = 0,
+            C2DXPayStatusFail = 1,
+            C2DXPayStatusCancel = 2,
+            C2DXPayStatusUnknow = 3
         };
 
         //支付订单
@@ -108,6 +109,7 @@ namespace mob {
             static void
             payWithOrder(C2DXPayOrder *order, C2DXPayChannel channel, C2DXPaySDKListener *listener);
 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
             /**
              开启debugLog iOS only
 
@@ -121,6 +123,7 @@ namespace mob {
              @return 版本号
              */
             static std::string getVersion();
+#endif
         };
     }
 }

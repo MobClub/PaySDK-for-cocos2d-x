@@ -3,6 +3,17 @@
 
 using namespace mob::paysdk;
 
+
+C2DXAndroidOrder::C2DXAndroidOrder()
+{
+
+}
+
+C2DXAndroidOrder::~C2DXAndroidOrder()
+{
+
+}
+
 C2DXAndroidPayOrder* C2DXAndroidPayOrder::create()
 {
     C2DXAndroidPayOrder* p = new C2DXAndroidPayOrder();

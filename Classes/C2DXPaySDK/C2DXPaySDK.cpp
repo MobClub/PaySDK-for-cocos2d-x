@@ -14,7 +14,7 @@
 #include "C2DXAndroidPaySDK.h"
 #endif
 
-using namespace ::paysdk;
+using namespace mob::paysdk;
 
 void C2DXPaySDK::payWithTicketId(std::string ticketId, C2DXPayChannel channel, C2DXPaySDKListener *listener)
 {
@@ -34,22 +34,17 @@ void C2DXPaySDK::payWithOrder(C2DXPayOrder *order, C2DXPayChannel channel, C2DXP
 #endif
 }
 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 void C2DXPaySDK::setDebugMode(bool enableDebug)
 {
-#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     C2DXiOSPaySDK::setDebugMode(enableDebug);
-#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
-    C2DXAndroidPaySDK::setDebugMode(enableDebug);
-#endif
 }
 
 std::string C2DXPaySDK::getVersion()
 {
-#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
-    return C2DXiOSPaySDK::getVersion();
-#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     return C2DXAndroidPaySDK::getVersion();
-#endif
+
 }
+#endif
 
 

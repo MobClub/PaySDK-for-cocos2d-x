@@ -3,6 +3,48 @@
 #include "JvmJniEnv.h"
 #include "C2DXAndroidOnPayListener.h"
 
+C2DXAndroidPayApi::C2DXAndroidPayApi()
+{
+}
+
+void C2DXAndroidPayApi::pay(C2DXAndroidPayOrder* order, C2DXOnPayListener* callback)
+{
+    JvmJniEnv env;
+    jobject jApi = getLocalJavaObject(env);
+    jclass jApiClazz = getJavaClass(env, jApi);
+    jmethodID jApiPayMethod = getJavaMethodID(env, jApiClazz, "pay",
+                                              "(Lcom/mob/paysdk/Order;Lcom/mob/paysdk/OnPayListener;)V");
+
+    jobject jorder = order->getLocalJavaObject(env);
+
+    C2DXAndroidOnPayListener* cxx = C2DXAndroidOnPayListener::create();
+    cxx->setOrder(order); cxx->setPayApi(this);	cxx->setOnPayListener(callback);
+    jobject jListener = cxx->getLocalJavaObject(env);
+
+    env->CallVoidMethod(jApi, jApiPayMethod, jorder, jListener);
+}
+
+
+void C2DXAndroidPayApi::pay(C2DXAndroidTicketOrder* order, C2DXOnPayListener* callback)
+{
+    JvmJniEnv env;
+    jobject jApi = getLocalJavaObject(env);
+    jclass jApiClazz = getJavaClass(env, jApi);
+    jmethodID jApiPayMethod = getJavaMethodID(env, jApiClazz, "pay",
+                                              "(Lcom/mob/paysdk/Order;Lcom/mob/paysdk/OnPayListener;)V");
+
+    jobject jorder = order->getLocalJavaObject(env);
+
+    C2DXAndroidOnPayListener* cxx = C2DXAndroidOnPayListener::create();
+    cxx->setOrder(order); cxx->setPayApi(this);	cxx->setOnPayListener(callback);
+    jobject jListener = cxx->getLocalJavaObject(env);
+
+    env->CallVoidMethod(jApi, jApiPayMethod, jorder, jListener);
+}
+
+C2DXAndroidPayApi::~C2DXAndroidPayApi()
+{
+}
 
 C2DXAndroidAliApi* C2DXAndroidAliApi::create()
 {
@@ -17,53 +59,15 @@ C2DXAndroidAliApi::C2DXAndroidAliApi()
     attachJavaObject(env, javaObject);
 }
 
-void C2DXAndroidAliApi::pay(C2DXAndroidPayOrder* order, C2DXOnPayListener* callback)
-{
-
-    JvmJniEnv env;
-    jobject jApi = getLocalJavaObject(env);
-    jclass jApiClazz = getJavaClass(env, jApi);
-    jmethodID jApiPayMethod = getJavaMethodID(env, jApiClazz, "pay",
-        "(Lcom/mob/paysdk/Order;Lcom/mob/paysdk/OnPayListener;)V");
-
-    jobject jorder = order->getLocalJavaObject(env);
-
-    C2DXAndroidOnPayListener<C2DXAndroidPayOrder, C2DXAndroidAliApi>* cxx = C2DXAndroidOnPayListener<C2DXAndroidPayOrder, C2DXAndroidAliApi>::create();
-    cxx->setOrder(order); cxx->setPayApi(this);	cxx->setOnPayListener(callback);
-    jobject jListener = cxx->getLocalJavaObject(env);
-
-    env->CallVoidMethod(jApi, jApiPayMethod, jorder, jListener);
-}
-
-
-void C2DXAndroidAliApi::pay(C2DXAndroidTicketOrder* order, C2DXOnPayListener* callback)
-{
-    JvmJniEnv env;
-    jobject jApi = getLocalJavaObject(env);
-    jclass jApiClazz = getJavaClass(env, jApi);
-    jmethodID jApiPayMethod = getJavaMethodID(env, jApiClazz, "pay",
-        "(Lcom/mob/paysdk/Order;Lcom/mob/paysdk/OnPayListener;)V");
-
-    jobject jorder = order->getLocalJavaObject(env);
-
-    C2DXAndroidOnPayListener<C2DXAndroidTicketOrder, C2DXAndroidAliApi>* cxx = C2DXAndroidOnPayListener<C2DXAndroidTicketOrder, C2DXAndroidAliApi>::create();
-	cxx->setOrder(order); cxx->setPayApi(this);	cxx->setOnPayListener(callback);
-    jobject jListener = cxx->getLocalJavaObject(env);
-
-    env->CallVoidMethod(jApi, jApiPayMethod, jorder, jListener);
-}
-
 C2DXAndroidAliApi::~C2DXAndroidAliApi()
 {
 
 }
 
-
 C2DXAndroidWxApi* C2DXAndroidWxApi::create()
 {
     return new C2DXAndroidWxApi();
 }
-
 
 C2DXAndroidWxApi::C2DXAndroidWxApi()
 {
@@ -72,44 +76,24 @@ C2DXAndroidWxApi::C2DXAndroidWxApi()
     attachJavaObject(env, javaObject);
 }
 
-void C2DXAndroidWxApi::pay(C2DXAndroidPayOrder* order, C2DXOnPayListener* callback)
-{
-    JvmJniEnv env;
-    jobject jApi = getLocalJavaObject(env);
-    jclass jApiClazz = getJavaClass(env, jApi);
-    jmethodID jApiPayMethod = getJavaMethodID(env, jApiClazz, "pay",
-                                              "(Lcom/mob/paysdk/Order;Lcom/mob/paysdk/OnPayListener;)V");
-
-    jobject jorder = order->getLocalJavaObject(env);
-
-    C2DXAndroidOnPayListener<C2DXAndroidPayOrder, C2DXAndroidWxApi>* cxx = C2DXAndroidOnPayListener<C2DXAndroidPayOrder, C2DXAndroidWxApi>::create();
-	cxx->setOrder(order); cxx->setPayApi(this);	cxx->setOnPayListener(callback);
-    jobject jListener = cxx->getLocalJavaObject(env);
-
-    env->CallVoidMethod(jApi, jApiPayMethod, jorder, jListener);
-}
-
-
-void C2DXAndroidWxApi::pay(C2DXAndroidTicketOrder* order, C2DXOnPayListener* callback)
-{
-    JvmJniEnv env;
-    jobject jApi = getLocalJavaObject(env);
-    jclass jApiClazz = getJavaClass(env, jApi);
-    jmethodID jApiPayMethod = getJavaMethodID(env, jApiClazz, "pay",
-        "(Lcom/mob/paysdk/Order;Lcom/mob/paysdk/OnPayListener;)V");
-
-    jobject jorder = order->getLocalJavaObject(env);
-
-    C2DXAndroidOnPayListener<C2DXAndroidTicketOrder, C2DXAndroidWxApi>* cxx = C2DXAndroidOnPayListener<C2DXAndroidTicketOrder, C2DXAndroidWxApi>::create();
-	cxx->setOrder(order); cxx->setPayApi(this);	cxx->setOnPayListener(callback);
-    jobject jListener = cxx->getLocalJavaObject(env);
-
-    env->CallVoidMethod(jApi, jApiPayMethod, jorder, jListener);
-}
-
 C2DXAndroidWxApi::~C2DXAndroidWxApi()
 {
 }
 
+C2DXAndroidUnionApi* C2DXAndroidUnionApi::create()
+{
+    return new C2DXAndroidUnionApi();
+}
+
+C2DXAndroidUnionApi::C2DXAndroidUnionApi()
+{
+    JvmJniEnv env;
+    jobject javaObject = newJavaInstance(env, "com/mob/paysdk/UnionPayAPI");
+    attachJavaObject(env, javaObject);
+}
+
+C2DXAndroidUnionApi::~C2DXAndroidUnionApi()
+{
+}
 
 

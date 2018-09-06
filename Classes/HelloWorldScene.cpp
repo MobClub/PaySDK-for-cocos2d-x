@@ -59,7 +59,9 @@ bool HelloWorld::init()
         return false;
     }
 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     C2DXPaySDK::setDebugMode(true);
+#endif
     
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();

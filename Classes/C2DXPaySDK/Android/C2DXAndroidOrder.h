@@ -10,8 +10,17 @@ namespace mob
 {
     namespace paysdk
     {
+        class C2DXAndroidOrder : public C2DXCxxJavaObject
+        {
+        protected:
+            C2DXAndroidOrder();
+        public:
+            virtual C2DXString getTicketId() = 0;
+        public:
+            ~C2DXAndroidOrder();
+        };
 
-        class C2DXAndroidPayOrder : public C2DXCxxJavaObject
+        class C2DXAndroidPayOrder : public C2DXAndroidOrder
         {
         public:
             CREATE_INSTANCE_FUNC(C2DXAndroidPayOrder);
@@ -85,7 +94,7 @@ namespace mob
         };
 
 
-        class C2DXAndroidTicketOrder : public C2DXCxxJavaObject
+        class C2DXAndroidTicketOrder : public C2DXAndroidOrder
         {
 
         public:

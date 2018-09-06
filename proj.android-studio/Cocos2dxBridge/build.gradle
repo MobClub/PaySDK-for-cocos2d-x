@@ -5,7 +5,6 @@ apply from: 'build-mix.gradle'
 apply plugin: 'com.mob.sdk'
 
 android {
-    publishNonDefault true
     compileSdkVersion findCompileSdkVersion()
     buildToolsVersion findBuildTools()
 
@@ -57,7 +56,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             zipAlignEnabled true
 
             externalNativeBuild {
@@ -89,13 +88,14 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-
-    Project p = findProject(':PaySDK')
-    if (null != p) {
-        compile project(':PaySDK')
-    } else {
-        MobSDK {
-            PaySDK {version = '1.0.0.1'}
+    MobSDK {
+        PaySDK {
+            version '1.1.0'
+            dev {
+                AliPay {}
+                Wechat {}
+                UnionPay {}
+            }
         }
     }
 }

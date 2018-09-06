@@ -16,6 +16,7 @@ LOCAL_SRC_FILES := 	../../../Classes/C2DXPaySDK/C2DXPaySDK.cpp \
                     ../../../Classes/C2DXPaySDK/Android/C2DXAndroidOrder.cpp \
                     ../../../Classes/C2DXPaySDK/Android/C2DXCxxJavaObject.cpp \
                     ../../../Classes/C2DXPaySDK/Android/C2DXAndroidOnPayListener.cpp \
+                    ../../../Classes/C2DXPaySDK/Android/C2DXAndroidPayResult.cpp \
                     ../../../Classes/C2DXPaySDK/Android/com_mob_paysdk_cocos2dx_OnPayListener.cpp
 
 

@@ -1,39 +1,74 @@
-//
-// Created by litl on 2017/5/18.
-//
+#include "C2DXAndroidPayResult.h"
 
-#include "C2DXAndroidActionListener.h"
-#include "JSON/CCJSONConverter.h"
-
-C2DXAndroidActionListener::C2DXAndroidActionListener()
+C2DXAndroidPayResult::C2DXAndroidPayResult()
 {
-    getModIdCallBack = NULL;
+
 }
 
-void C2DXAndroidActionListener::setGetModIdCallBack(C2DXGetMobIdResultEvent cb)
+C2DXAndroidPayResult* C2DXAndroidPayResult::create(jobject lRef)
 {
-    getModIdCallBack = cb;
+    C2DXAndroidPayResult* payResult = new C2DXAndroidPayResult();
+    JvmJniEnv env;
+    payResult->attachJavaObject(env, lRef);
 }
 
-void C2DXAndroidActionListener::onResult(const char* result)
+
+int C2DXAndroidPayResult::getPayCode()
 {
-    CCJSONConverter* json = CCJSONConverter::sharedConverter();
-    C2DXDictionary* dic = json->dictionaryFrom(result);
-    CCC2DXString* modId = (CCC2DXString*) dic->objectForKey("mobID");
-    C2DXGetMobIdResultEvent prt = getModIdCallBack;
-    if (prt) {
-        prt(modId->getCC2DXString());
+    JvmJniEnv env;
+    jobject jthiz = getLocalJavaObject(env);
+    if (NULL == jthiz) {
+        return 0;
     }
-    dic->release();
+    jclass jclazz = env->GetObjectClass(jthiz);
+    jmethodID jmethod = env->GetMethodID(jclazz, "getPayCode", "()I;");
+    jint jvalue = env->CallIntMethod(jthiz, jmethod);
+    return jvalue;
 }
 
-void C2DXAndroidActionListener::onError(const char* error)
+C2DXString C2DXAndroidPayResult::getPayMessage()
 {
-    // do nothing
+    JvmJniEnv env;
+    jobject jthiz = getLocalJavaObject(env);
+    if (NULL == jthiz) {
+        return "";
+    }
+    jclass jclazz = env->GetObjectClass(jthiz);
+    jmethodID jmethod = env->GetMethodID(jclazz, "getPayMessage", "()Ljava/lang/String;");
+    jstring jvalue = (jstring)env->CallObjectMethod(jthiz, jmethod);
+    C2DXString ret = env->GetStringUTFChars(jvalue, NULL);
+    return ret;
 }
 
-C2DXAndroidActionListener::~C2DXAndroidActionListener()
+C2DXString C2DXAndroidPayResult::getPayChannelCode()
 {
-    // do nothing
+    JvmJniEnv env;
+    jobject jthiz = getLocalJavaObject(env);
+    if (NULL == jthiz) {
+        return "";
+    }
+    jclass jclazz = env->GetObjectClass(jthiz);
+    jmethodID jmethod = env->GetMethodID(jclazz, "getPayChannelCode", "()Ljava/lang/String;");
+    jstring jvalue = (jstring)env->CallObjectMethod(jthiz, jmethod);
+    C2DXString ret = env->GetStringUTFChars(jvalue, NULL);
+    return ret;
+}
+
+C2DXString C2DXAndroidPayResult::getPayChannelMessage()
+{
+    JvmJniEnv env;
+    jobject jthiz = getLocalJavaObject(env);
+    if (NULL == jthiz) {
+        return "";
+    }
+    jclass jclazz = env->GetObjectClass(jthiz);
+    jmethodID jmethod = env->GetMethodID(jclazz, "getPayChannelMessage", "()Ljava/lang/String;");
+    jstring jvalue = (jstring)env->CallObjectMethod(jthiz, jmethod);
+    C2DXString ret = env->GetStringUTFChars(jvalue, NULL);
+    return ret;
+}
+
+C2DXAndroidPayResult::~C2DXAndroidPayResult()
+{
 }
 

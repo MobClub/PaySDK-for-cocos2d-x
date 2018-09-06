@@ -19,10 +19,10 @@ JNIEXPORT jboolean JNICALL Java_com_mob_paysdk_cocos2dx_OnPayListener_nativeOnWi
 /*
  * Class:     com_mob_paysdk_cocos2dx_OnPayListener
  * Method:    nativeOnPayEnd
- * Signature: (ILjava/lang/Object;Lcom/mob/paysdk/MobPayAPI;)V
+ * Signature: (Lcom/mob/paysdk/PayResult;Ljava/lang/Object;Lcom/mob/paysdk/MobPayAPI;)V
  */
 JNIEXPORT void JNICALL Java_com_mob_paysdk_cocos2dx_OnPayListener_nativeOnPayEnd
-  (JNIEnv *, jobject, jint, jint, jobject, jobject);
+  (JNIEnv *, jobject, jint, jobject, jobject, jobject);
 
 #ifdef __cplusplus
 }

@@ -20,7 +20,7 @@ android {
                     targets 'MyGame'
                     arguments 'NDK_TOOLCHAIN_VERSION=4.9'
                     arguments 'APP_PLATFORM=android-16'
-
+                    arguments "NDK_APPLICATION_MK=jni/Application.mk"
                     def module_paths = [project.file("../../cocos2d").absolutePath,
                                         project.file("../../cocos2d/cocos").absolutePath,
                                         project.file("../../cocos2d/external").absolutePath]
@@ -34,7 +34,7 @@ android {
                     }
 
                     arguments '-j' + Runtime.runtime.availableProcessors()
-                    abiFilters "armeabi-v7a"
+                    abiFilters.addAll("armeabi armeabi-v7a arm64-v8a x86 x86_64".split("\\ "))
                 }
             }
         }
@@ -89,6 +89,5 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':libcocos2dx')
-    releaseCompile project(path: ':Cocos2dxBridge', configuration: 'release')
-    debugCompile project(path: ':Cocos2dxBridge', configuration: 'debug')
+    compile project(':Cocos2dxBridge')
 }

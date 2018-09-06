@@ -1,7 +1,8 @@
-#ifndef __C2DXPAYSDKBRIDGE__C2DXALIPAYAPI__
-#define __C2DXPAYSDKBRIDGE__C2DXALIPAYAPI__
+#ifndef __C2DXPAYSDKBRIDGE__C2DXANDROIDPAYRESULT__
+#define __C2DXPAYSDKBRIDGE__C2DXANDROIDPAYRESULT__
 
-#include "C2DXPayApi.h"
+#include "C2DXAndroidTypeDef.h"
+#include "C2DXCxxJavaObject.h"
 
 using namespace mob::paysdk;
 
@@ -9,15 +10,18 @@ namespace mob
 {
     namespace paysdk
     {
-        class C2DXAliPayApi : C2DXMobPayApi {
-        private:
-            C2DXAliPayApi();
+        class C2DXAndroidPayResult : C2DXCxxJavaObject {
+        protected:
+            C2DXAndroidPayResult();
         public:
-            CREATE_INSTANCE_FUNC(C2DXAliPayApi);
-            virtual void pay(C2DXPayOrder* order, C2DXOnPayListener* callback);
-
+            static C2DXAndroidPayResult* create(jobject lRef);
         public:
-            virtual ~C2DXAliPayApi();
+            int getPayCode();
+            C2DXString getPayMessage();
+            C2DXString getPayChannelCode();
+            C2DXString getPayChannelMessage();
+        public:
+            virtual ~C2DXAndroidPayResult();
         };
     }
 }
