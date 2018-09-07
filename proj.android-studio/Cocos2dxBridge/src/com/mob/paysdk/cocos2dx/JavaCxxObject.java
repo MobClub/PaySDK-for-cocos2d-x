@@ -4,30 +4,30 @@ import com.mob.tools.proguard.EverythingKeeper;
 
 public abstract class JavaCxxObject extends Object implements EverythingKeeper {
 
-    private int cxxObject;
+    private long cxxObject;
 
-    protected void attachCxxObject(int pointer) {
+    protected void attachCxxObject(long pointer) {
         cxxObject = pointer;
     }
 
-    protected int getCxxObject() {
+    protected long getCxxObject() {
         return cxxObject;
     }
 
-    protected void detachCxxObject(int pointer) {
+    protected void detachCxxObject(long pointer) {
         cxxObject = 0;
     }
 
-    protected void jniAttachCxxObject(int pointer) {
+    protected void jniAttachCxxObject(long pointer) {
         attachCxxObject(pointer);
     }
 
-    protected int jniGetCxxObject() {
+    protected long jniGetCxxObject() {
         return getCxxObject();
     }
 
 
-    protected void jniDetachCxxObject(int pointer) {
+    protected void jniDetachCxxObject(long pointer) {
         detachCxxObject(pointer);
     }
 

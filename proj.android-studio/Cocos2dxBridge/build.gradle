@@ -32,7 +32,6 @@ android {
                 }
 
                 arguments '-j' + Runtime.runtime.availableProcessors()
-                abiFilters "armeabi-v7a"
             }
         }
     }
@@ -91,7 +90,7 @@ dependencies {
     MobSDK {
         PaySDK {
             version '1.1.0'
-            dev {
+            info {
                 AliPay {}
                 Wechat {}
                 UnionPay {}

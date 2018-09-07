@@ -12,6 +12,7 @@ namespace mob
     {
         typedef std::string C2DXString;
         typedef C2DXPaySDKListener C2DXOnPayListener;
+        typedef int64_t C2DXPointer;
     }
 }
 

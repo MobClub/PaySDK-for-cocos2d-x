@@ -18,6 +18,9 @@ void C2DXAndroidPaySDK::payWithTicketId(std::string ticketId, C2DXPayChannel cha
     } else if (C2DXPayChannelWechat == channel) {
         C2DXAndroidWxApi* api = C2DXAndroidWxApi::create();
         api->pay(dOrder, listener);
+    } else if (C2DXPayChannelUnionPay == channel) {
+        C2DXAndroidUnionApi* api = C2DXAndroidUnionApi::create();
+        api->pay(dOrder, listener);
     }
 }
 
@@ -37,25 +40,18 @@ void C2DXAndroidPaySDK::payWithOrder(C2DXPayOrder *order, C2DXPayChannel channel
     } else if (C2DXPayChannelWechat == channel) {
         C2DXAndroidWxApi* api = C2DXAndroidWxApi::create();
         api->pay(dOrder, listener);
+    } else if (C2DXPayChannelUnionPay == channel) {
+        C2DXAndroidUnionApi* api = C2DXAndroidUnionApi::create();
+        api->pay(dOrder, listener);
     }
 }
 
-void C2DXAndroidPaySDK::setDebugMode(bool enableDebug)
+void C2DXAndroidPaySDK::onWillPay(C2DXString ticketId)
 {
 
 }
 
-std::string C2DXAndroidPaySDK::getVersion()
-{
-
-}
-
-void C2DXAndroidPaySDK::onWillPay(std::string ticketId)
-{
-
-}
-
-void C2DXAndroidPaySDK::onPayEnd(paysdk::C2DXPayStatus status, std::string ticketId, int errorCode, std::string errorDes)
+void C2DXAndroidPaySDK::onPayEnd(paysdk::C2DXPayStatus status, C2DXString ticketId, int errorCode, C2DXString errorDes)
 {
 
 }

@@ -60,9 +60,9 @@ void C2DXAndroidOnPayListener::attachJavaObject(JNIEnv* env, jobject lRef)
     lRef = getLocalJavaObject(env);
     if (NULL != lRef) {
         jclass jclazz = getJavaClass(env, lRef);
-        jint cxxObject = (jint)((C2DXCxxJavaObject*)this);
-        jmethodID jMethod = getJavaMethodID(env, jclazz, "jniAttachCxxObject", "(I)V");
-        env->CallVoidMethod(lRef, jMethod, (jint)cxxObject);
+        C2DXPointer cxxObject = (C2DXPointer)((C2DXCxxJavaObject*)this);
+        jmethodID jMethod = getJavaMethodID(env, jclazz, "jniAttachCxxObject", "(J)V");
+        env->CallVoidMethod(lRef, jMethod, (jlong)cxxObject);
     }
 }
 
@@ -76,9 +76,9 @@ void C2DXAndroidOnPayListener::detachJavaObject(JNIEnv* env, jobject lRef)
     lRef = getLocalJavaObject(env);
     if (NULL != lRef) {
         jclass jclazz = getJavaClass(env, lRef);
-        jint cxxObject = (jint)((C2DXCxxJavaObject*)this);
-        jmethodID jMethod = getJavaMethodID(env, jclazz, "jniDetachCxxObject", "(I)V");
-        env->CallVoidMethod(lRef, jMethod, (jint)cxxObject);
+        C2DXPointer cxxObject = (C2DXPointer)((C2DXCxxJavaObject*)this);
+        jmethodID jMethod = getJavaMethodID(env, jclazz, "jniDetachCxxObject", "(J)V");
+        env->CallVoidMethod(lRef, jMethod, (jlong)cxxObject);
     }
     C2DXCxxJavaObject::detachJavaObject(env, lRef);
 }
