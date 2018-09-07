@@ -32,12 +32,29 @@ $(call import-module, jni)
 
 [原生MobPaySDK快速集成文档](http://wiki.mob.com/paysdk-%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90/)
 
+
 ## iOS端接入
 
+#### 配置信息
 
-## 添加代码（伪代码）
+###### 1. 白名单配置
 
-#### 1. 创建订单
+白名单可参考下图参加
+
+![image.png](https://upload-images.jianshu.io/upload_images/2121032-42e81c4081e61434.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+
+###### 2. URL Scheme 添加
+
+ URL Schemes 可设置为自己定义的Schemes，也可以使用测试Demo中的，但一定要添加。
+ 
+![image.png](https://upload-images.jianshu.io/upload_images/2121032-dab334384c96e504.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+#### 添加代码（伪代码）
+
+###### 1. 创建订单
 
 ```
                 C2DXPayOrder *order = new C2DXPayOrder();
@@ -49,7 +66,7 @@ $(call import-module, jni)
                 order -> metadata = "元数据";
 ```
 
-#### 2. 创建监听器对象
+###### 2. 创建监听器对象
 
 我这里让当前Scene继承C2DXPaySDKListener接口，在支付的scene里直接使用this就可以了
 
@@ -61,11 +78,12 @@ class HelloWorld : public cocos2d::Scene, public C2DXPaySDKListener
 }
 ```
 
-#### 3. 发起支付
+###### 3. 发起支付
 
 调用payWithOrder即可, 第二个参数是枚举类型，表示支付渠道(支付宝、微信等)
 
 ```
 C2DXPaySDK::payWithOrder(order, C2DXPayChannelAlipay, this);
 ```
+
 
