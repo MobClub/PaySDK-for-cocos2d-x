@@ -81,7 +81,7 @@ class HelloWorld : public cocos2d::Scene, public C2DXPaySDKListener
 
 ###### 3. 发起支付
 
-调用payWithOrder即可, 第二个参数是枚举类型，表示支付渠道(支付宝、微信等)
+调用payWithOrder即可, 第二个参数是枚举类型，表示支付渠道(支付宝、微信、银联等)
 
 ```
 C2DXPaySDK::payWithOrder(order, C2DXPayChannelAlipay, this);
