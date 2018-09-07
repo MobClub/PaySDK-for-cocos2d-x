@@ -13,9 +13,9 @@ git clone -b master --depth=1 https://github.com/MobClub/PaySDK-for-cocos2d-x.gi
 
 ## Android端接入
 
-###### 1. 使用Android Studio导入Cocos2dxBridge Module到您的项目中（目录proj.android-studio\Cocos2dxBridge）， 并依赖此module。
+1. 使用Android Studio导入Cocos2dxBridge Module到您的项目中（目录proj.android-studio\Cocos2dxBridge）， 并依赖此module。
 
-###### 2. 在您的Android.mk文件中加入对Cocos2dxBridge module的jni部分(Android.mk文件）的引用，即是引入paysdk_bridge静态库。在您的Android.mk文件中添加如下代码： 
+2. 在您的Android.mk文件中加入对Cocos2dxBridge module的jni部分(Android.mk文件）的引用，即是引入paysdk_bridge静态库。在您的Android.mk文件中添加如下代码： 
 编译需要的cpp源代码(Android.mk)
 
 ```
@@ -26,7 +26,7 @@ $(call import-module, jni)
 
 如果您不太明白怎么复制这三行配置，可以去参考demo的[Android.mk](https://github.com/MobClub/PaySDK-for-cocos2d-x/blob/SourceCode/proj.android-studio/app/jni/Android.mk)文件。
 
-###### 3. gradle配置
+3. gradle配置
 
 请参考原生Android平台的配置文件中的gradle配置部分或者Demo
 
